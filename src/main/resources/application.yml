@@ -31,3 +31,5 @@ spring:
       default_expire_time: 86400
 
 
+    session:
+      store-type: redis

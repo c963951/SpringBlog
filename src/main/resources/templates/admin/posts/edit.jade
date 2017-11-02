@@ -1,9 +1,9 @@
 extends ../layout/admin
 
 block head
-  script(src="/webjars/ace/1.2.0/src-min/ace.js")
-  script(src="/webjars/ace/1.2.0/src-min/theme-github.js")
-  script(src="/webjars/ace/1.2.0/src-min/mode-markdown.js")
+  script(src="/webjars/ace/1.2.8/src-noconflict/ace.js")
+  script(src="/webjars/ace/1.2.8/src-noconflict/theme-github.js")
+  script(src="/webjars/ace/1.2.8/src-noconflict/mode-markdown.js")
   
 block content
   h1 Edit Post
@@ -18,7 +18,7 @@ block content
       textarea.form-control#content(name="content", style="display:none;")
         = postForm.getContent()
       div#content-editor
-        #{postForm.getContent()}
+        = postForm.getContent()
     .item-row
       hr
       .row
@@ -50,24 +50,25 @@ block content
       button.btn.btn-primary.btn-block(type="submit") Save
 
     script
-      var editor = ace.edit("content-editor");
-      editor.setTheme("ace/theme/github");
+      :javascript
+        var editor = ace.edit("content-editor");
+        editor.setTheme("ace/theme/github");
 
-      var MarkdownMode = ace.require("ace/mode/markdown").Mode;
-      editor.getSession().setMode(new MarkdownMode());
+        var MarkdownMode = ace.require("ace/mode/markdown").Mode;
+        editor.getSession().setMode(new MarkdownMode());
 
-      editor.getSession().setUseWrapMode(true);
+        editor.getSession().setUseWrapMode(true);
 
-      $("form").submit(function(){
-          $("#content").val(editor.getValue());
-          return true;
-      });
+        $("form").submit(function(){
+            $("#content").val(editor.getValue());
+            return true;
+        });
 
-      //$(function() {
-      //  var editor = new Simditor({
-      //    textarea: $('#content'),
-      //    markdown: true,
-      //    toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', '|', 'markdown']
-      //    });
-      //});
+        //$(function() {
+        //  var editor = new Simditor({
+        //    textarea: $('#content'),
+        //    markdown: true,
+        //    toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment', '|', 'markdown']
+        //    });
+        //});
 

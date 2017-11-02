@@ -10,6 +10,7 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -30,6 +31,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private Environment env;
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("/webjars/**")
+                .addResourceLocations("/webjars/");
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
