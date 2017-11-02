@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import com.raysmond.blog.Application;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +39,11 @@ class JpaConfig implements TransactionManagementConfigurer {
     @Value("${spring.hibernate.show_sql}")
     private Boolean showSql;
 
+    @Value("${spring.hibernate.use_sql_comments}")
+    private Boolean useSqlComments;
+    @Value("${spring.hibernate.format_sql}")
+    private Boolean formatSql;
+
     @Bean
     public DataSource configureDataSource() {
         HikariConfig config = new HikariConfig();
@@ -66,7 +72,9 @@ class JpaConfig implements TransactionManagementConfigurer {
         Properties jpaProperties = new Properties();
         jpaProperties.put(org.hibernate.cfg.Environment.DIALECT, dialect);
         jpaProperties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, hbm2ddlAuto);
-        jpaProperties.put(org.hibernate.cfg.Environment.SHOW_SQL, showSql);
+        //jpaProperties.put(org.hibernate.cfg.Environment.SHOW_SQL, showSql);
+        //jpaProperties.put(org.hibernate.cfg.Environment.USE_SQL_COMMENTS, useSqlComments);
+        jpaProperties.put(org.hibernate.cfg.Environment.FORMAT_SQL, formatSql);
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
 
         return entityManagerFactoryBean;

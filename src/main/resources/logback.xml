@@ -16,4 +16,11 @@
 	</root>
 
 	<logger name="com.raysmond.blog" level="ALL" />
+
+	<logger name="org.hibernate.SQL" level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="org.hibernate.type" level="TRACE">
+		<appender-ref ref="STDOUT" />
+	</logger>
 </configuration>

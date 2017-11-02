@@ -5,6 +5,7 @@ import com.raysmond.blog.services.AppSetting;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.domingosuarez.boot.autoconfigure.jade4j.JadeHelper;
@@ -15,12 +16,26 @@ import com.domingosuarez.boot.autoconfigure.jade4j.JadeHelper;
 @JadeHelper("viewHelper")
 public class ViewHelper {
 
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy");
-    private static final SimpleDateFormat DATE_FORMAT_MONTH_DAY = new SimpleDateFormat("MMM dd");
+    private static DateFormatSymbols ruDateFormatSymbolsFull = new DateFormatSymbols(){
+        @Override
+        public String[] getMonths() {
+            return new String[]{"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"};
+        }
+    };
+    private static DateFormatSymbols ruDateFormatSymbolsShort = new DateFormatSymbols(){
+        @Override
+        public String[] getMonths() {
+            return new String[]{"янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"};
+        }
+    };
+
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy", ViewHelper.ruDateFormatSymbolsFull);
+    private static final SimpleDateFormat DATE_FORMAT_MONTH_DAY = new SimpleDateFormat("MMM dd", ViewHelper.ruDateFormatSymbolsShort);
 
     private AppSetting appSetting;
 
     private String applicationEnv;
+
 
     @Autowired
     public ViewHelper(AppSetting appSetting){

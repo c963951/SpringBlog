@@ -1,6 +1,7 @@
 package com.raysmond.blog;
 
 import com.raysmond.blog.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -38,8 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                //.httpBasic().disable()
             .authorizeRequests()
                 .antMatchers("/admin/**").authenticated()
+                //.antMatchers("/authenticate").permitAll()
                 .anyRequest().permitAll()
                 .and()
             .formLogin()

@@ -15,7 +15,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "users")
 @Getter @Setter
-public class User extends BaseModel{
+public class User extends BaseModel {
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final String ROLE_USER  = "ROLE_USER";
 

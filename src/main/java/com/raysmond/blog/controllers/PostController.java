@@ -52,4 +52,11 @@ public class PostController {
         return "posts/show";
     }
 
+    @RequestMapping(value = "projects", method = GET)
+    public String projects(Model model){
+        //model.addAttribute("posts", postService.getArchivePosts());
+
+        return "posts/projects";
+    }
+
 }

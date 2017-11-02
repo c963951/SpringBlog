@@ -2,6 +2,7 @@ package com.raysmond.blog;
 
 import com.raysmond.blog.support.web.ViewHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -23,6 +24,7 @@ import static com.raysmond.blog.Constants.*;
  */
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
+    @Qualifier("viewHelper")
     @Autowired
     private ViewHelper viewHelper;
 
