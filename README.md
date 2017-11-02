@@ -3,10 +3,8 @@ SpringBlog
 
 SpringBlog is a very simple and clean-design blog system implemented with Spring Boot.
 It's one of my learning projects to explore awesome features in Spring Boot web programming. I had put it on production
-for my personal blog site [https://raysmond.com](https://raysmond.com) for about one year. Now, I turn to Hexo for my blog site.
+for my personal [bvn13's blog](https://bvn13.tk) on 2017-11-03. 
 
-There's no demo online. Here's the screenshot of my previous blog homepage.
-![](http://7b1fa0.com1.z0.glb.clouddn.com/screencapture-blog-raysmond-9000-1480663084590.png)
 
 SpringBlog is powered by many powerful frameworks and third-party projects:
 
@@ -20,6 +18,15 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 - [Jade4j](https://github.com/neuland/jade4j) - [Jade](http://jade-lang.com/) is an elegant template language.
 - [Webjars](http://www.webjars.org/) - A client-side web libraries packaged into JAR files. A easy way to manage JavaScript and CSS vendors in Gradle.
 - [Redis](http://redis.io/) - A very powerful in-memory data cache server.
+
+## Changelog
+
+#### 2017-11-03
+
+* Was forked from [SpringBlog by Raysmon](https://github.com/Raysmond/SpringBlog)
+* Was migrated onto __SpringBoot 1.5.8__, all libraries was updated
+
+
 
 ## Development
 
