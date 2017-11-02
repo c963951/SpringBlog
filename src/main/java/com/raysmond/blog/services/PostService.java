@@ -173,6 +173,19 @@ public class PostService {
         return createPost(post);
     }
 
+    public Post createProjectsPage() {
+        logger.debug("Create default projects page");
+
+        Post post = new Post();
+        post.setTitle(Constants.PROJECTS_PAGE_PERMALINK);
+        post.setContent(Constants.PROJECTS_PAGE_PERMALINK.toLowerCase());
+        post.setPermalink(Constants.PROJECTS_PAGE_PERMALINK);
+        post.setUser(userService.getSuperUser());
+        post.setPostFormat(PostFormat.MARKDOWN);
+
+        return createPost(post);
+    }
+
     public Set<Tag> parseTagNames(String tagNames) {
         Set<Tag> tags = new HashSet<>();
 

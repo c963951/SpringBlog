@@ -15,4 +15,6 @@ public final class Constants {
 
     public static final String ABOUT_PAGE_PERMALINK = "about";
 
+    public static final String PROJECTS_PAGE_PERMALINK = "projects";
+
 }

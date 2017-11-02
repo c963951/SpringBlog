@@ -1,5 +1,6 @@
 package com.raysmond.blog.controllers;
 
+import com.raysmond.blog.Constants;
 import com.raysmond.blog.error.NotFoundException;
 import com.raysmond.blog.models.Post;
 import com.raysmond.blog.services.PostService;
@@ -39,12 +40,16 @@ public class PostController {
         try{
             post = postService.getPublishedPostByPermalink(permalink);
         } catch (NotFoundException ex){
-            if (permalink.matches("\\d+"))
+            if (permalink.matches("\\d+")) {
                 post = postService.getPost(Long.valueOf(permalink));
+            } else if (permalink.toLowerCase().trim().equals(Constants.PROJECTS_PAGE_PERMALINK)) {
+                post = postService.createProjectsPage();
+            }
         }
 
-        if (post == null)
+        if (post == null) {
             throw new NotFoundException("Post with permalink " + permalink + " is not found");
+        }
 
         model.addAttribute("post", post);
         model.addAttribute("tags", postService.getPostTags(post));
@@ -52,11 +57,5 @@ public class PostController {
         return "posts/show";
     }
 
-    @RequestMapping(value = "projects", method = GET)
-    public String projects(Model model){
-        //model.addAttribute("posts", postService.getArchivePosts());
-
-        return "posts/projects";
-    }
 
 }

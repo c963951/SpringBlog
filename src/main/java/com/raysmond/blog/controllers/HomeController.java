@@ -1,9 +1,12 @@
 package com.raysmond.blog.controllers;
 
 import com.raysmond.blog.Constants;
+import com.raysmond.blog.error.NotFoundException;
 import com.raysmond.blog.models.Post;
 import com.raysmond.blog.services.AppSetting;
 import com.raysmond.blog.services.PostService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 public class HomeController {
+
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
     private PostService postService;
@@ -35,10 +40,17 @@ public class HomeController {
 
     @RequestMapping(value = "about", method = GET)
     public String about(Model model) {
-        Post post = postService.getPublishedPostByPermalink(Constants.ABOUT_PAGE_PERMALINK);
+
+        Post post = null;
+        try {
+            post = postService.getPublishedPostByPermalink(Constants.ABOUT_PAGE_PERMALINK);
+        } catch (NotFoundException nfe) {
+            logger.debug("Get post with permalink " + Constants.ABOUT_PAGE_PERMALINK);
+            post = postService.createAboutPage();
+        }
 
         if (post == null) {
-            post = postService.createAboutPage();
+            throw new NotFoundException("Post with permalink " + Constants.ABOUT_PAGE_PERMALINK + " is not found");
         }
 
         model.addAttribute("about", post);
