@@ -21,8 +21,11 @@ meta(name="google-site-verification", content="OmD_S_p2BcdcKepDETH25TRCckl6yVXdk
 meta(name="msvalidate.01", content="7FF4CBEF427D306264AD6A092622B438")
 
 title
-  block title 
-    = App.getSiteName()
+  block title
+    if post != null
+      = post.getTitle() - App.getSiteName()
+    else
+      = App.getSiteName()
 
 link(rel='stylesheet', type='text/css', href='/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css')
 link(rel="stylesheet", type='text/css', href="/vendors/pygments/github.css")
