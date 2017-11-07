@@ -1,0 +1,12 @@
+[Unit]
+Description=myapp
+After=syslog.target
+
+[Service]
+User=bvn13
+#ExecStart=/home/bvn13/dev/blog/myblog.sh
+ExecStart=/usr/bin/java -jar /home/bvn13/dev/blog/SpringBlog-2.4.jar
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
