@@ -21,6 +21,13 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 
 ## Changelog
 
+#### 2017-11-07
+
+* Added 'admin' button on  the home page if admin is logged in
+* Added SEO meta-tags:
+  1. list of keywords
+  2. description
+
 #### 2017-11-03
 
 * Was forked from [SpringBlog by Raysmon](https://github.com/Raysmond/SpringBlog)
