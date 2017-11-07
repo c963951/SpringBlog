@@ -27,6 +27,7 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 * Added SEO meta-tags:
   1. list of keywords
   2. description
+* Updated html > head > title for posts pages
 
 #### 2017-11-03
 
