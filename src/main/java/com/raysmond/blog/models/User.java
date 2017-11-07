@@ -34,6 +34,10 @@ public class User extends BaseModel {
 
     }
 
+    public Boolean isAdmin() {
+        return this.role.equals(ROLE_ADMIN);
+    }
+
     public User(String email, String password, String role) {
         this.email = email;
         this.password = password;

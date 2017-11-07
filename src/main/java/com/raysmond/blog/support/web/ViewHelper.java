@@ -1,10 +1,13 @@
 package com.raysmond.blog.support.web;
 
 
+import com.raysmond.blog.models.User;
 import com.raysmond.blog.services.AppSetting;
+import com.raysmond.blog.services.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.security.Principal;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,7 +38,6 @@ public class ViewHelper {
     private AppSetting appSetting;
 
     private String applicationEnv;
-
 
     @Autowired
     public ViewHelper(AppSetting appSetting){

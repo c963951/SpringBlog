@@ -5,6 +5,7 @@ import java.util.Collections;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import com.domingosuarez.boot.autoconfigure.jade4j.JadeHelper;
 import com.raysmond.blog.Constants;
 import com.raysmond.blog.models.User;
 import com.raysmond.blog.repositories.UserRepository;
@@ -19,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+@JadeHelper("userService")
 public class UserService implements UserDetailsService {
 
     @Autowired
