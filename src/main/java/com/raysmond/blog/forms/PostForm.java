@@ -35,4 +35,7 @@ public class PostForm {
     @NotNull
     private String seoKeywords;
 
+    @NotNull
+    private String seoDescription;
+
 }

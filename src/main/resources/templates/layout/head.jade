@@ -2,8 +2,14 @@ meta(charset="utf-8")
 meta(http-equiv="X-UA-Compatible", content="IE=edge")
 meta(name="viewport", content="width=device-width, initial-scale=1")
 
-meta(name="description", content="#{App.getSiteSlogan()}")
+if seoDescription != null && !seoDescription.isEmpty()
+  meta(name="description", content="#{seoDescription}")
+else
+  meta(name="description", content="#{App.getSiteSlogan()}")
   
+if seoKeywords != null && !seoKeywords.isEmpty()
+  meta(name='keywords', content="#{seoKeywords}")
+
 meta(name="author", content="bvn13")
 
 link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
@@ -14,10 +20,7 @@ meta(name='wmail-verification', content='4dcdcf694a46ce7015fdfb69eb87b87c')
 meta(name="google-site-verification", content="OmD_S_p2BcdcKepDETH25TRCckl6yVXdkhP6QSfv0RU")
 meta(name="msvalidate.01", content="7FF4CBEF427D306264AD6A092622B438")
 
-if seoKeywords != null && !seoKeywords.isEmpty()
-  meta(name='keywords', content="#{seoKeywords}")
-
-title 
+title
   block title 
     = App.getSiteName()
 

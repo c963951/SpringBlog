@@ -107,6 +107,7 @@ public class PostController {
             post.setUser(userRepository.findByEmail(principal.getName()));
             post.setTags(postService.parseTagNames(postForm.getPostTags()));
             post.setSeoKeywords(postService.parseSeoKeywords(post, postForm.getSeoKeywords()));
+            post.setSeoDescription(postForm.getSeoDescription());
 
             postService.createPost(post);
 
@@ -126,6 +127,7 @@ public class PostController {
             DTOUtil.mapTo(postForm, post);
             post.setTags(postService.parseTagNames(postForm.getPostTags()));
             post.setSeoKeywords(postService.parseSeoKeywords(post, postForm.getSeoKeywords()));
+            post.setSeoDescription(postForm.getSeoDescription());
 
             postService.updatePost(post);
 

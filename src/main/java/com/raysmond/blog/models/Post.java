@@ -58,6 +58,9 @@ public class Post extends BaseModel {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.REMOVE)
     private Collection<SeoKeyword> seoKeywords = new ArrayList<>();
 
+    @Column(nullable = false, columnDefinition = "character varying DEFAULT ''")
+    private String seoDescription = "";
+
     private String permalink;
 
     public String getRenderedContent() {
