@@ -55,8 +55,8 @@ public class Post extends BaseModel {
     )
     private Set<Tag> tags = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.REMOVE)
-    private Collection<SeoKeyword> seoKeywords = new ArrayList<>();
+    @Column(nullable = false, columnDefinition = "character varying DEFAULT ''")
+    private String seoKeywords = "";
 
     @Column(nullable = false, columnDefinition = "character varying DEFAULT ''")
     private String seoDescription = "";

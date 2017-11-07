@@ -82,7 +82,7 @@ public class PostController {
         PostForm postForm = DTOUtil.map(post, PostForm.class);
 
         postForm.setPostTags(postService.getTagNames(post.getTags()));
-        postForm.setSeoKeywords(postService.getSeoKeywords(post.getSeoKeywords()));
+        postForm.setSeoKeywords(post.getSeoKeywords());
 
         model.addAttribute("post", post);
         model.addAttribute("postForm", postForm);
@@ -109,7 +109,7 @@ public class PostController {
             Post post = DTOUtil.map(postForm, Post.class);
             post.setUser(userRepository.findByEmail(principal.getName()));
             post.setTags(postService.parseTagNames(postForm.getPostTags()));
-            post.setSeoKeywords(postService.parseSeoKeywords(post, postForm.getSeoKeywords()));
+            post.setSeoKeywords(postForm.getSeoKeywords());
             post.setSeoDescription(postForm.getSeoDescription());
 
             postService.createPost(post);
@@ -129,7 +129,7 @@ public class PostController {
             Post post = postRepository.findOne(postId);
             DTOUtil.mapTo(postForm, post);
             post.setTags(postService.parseTagNames(postForm.getPostTags()));
-            post.setSeoKeywords(postService.parseSeoKeywords(post, postForm.getSeoKeywords()));
+            post.setSeoKeywords(postForm.getSeoKeywords());
             post.setSeoDescription(postForm.getSeoDescription());
 
             postService.updatePost(post);

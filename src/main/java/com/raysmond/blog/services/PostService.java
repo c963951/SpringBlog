@@ -37,9 +37,6 @@ public class PostService {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private SeoKeywordService seoKeywordService;
-
     public static final String CACHE_NAME = "cache.post";
     public static final String CACHE_NAME_ARCHIVE = CACHE_NAME + ".archive";
     public static final String CACHE_NAME_PAGE = CACHE_NAME + ".page";
@@ -147,23 +144,10 @@ public class PostService {
     }
 
     @Cacheable(value = CACHE_NAME_SEO_KEYWORDS, key = "#post.id.toString().concat('-seoKeywords')")
-    public Collection<SeoKeyword> getSeoKeywords(Post post) {
-        logger.debug("Get seoKeywords of post " + post.getId());
-
-        Collection<SeoKeyword> keywords = new ArrayList<>();
-
-        // Load the post first. If not, when the post is cached before while the seoKeywords not,
-        // then the LAZY loading of post tags will cause an initialization error because
-        // of not hibernate connection session
-        postRepository.findOne(post.getId()).getSeoKeywords().forEach(keywords::add);
-        return keywords;
-    }
-
-    @Cacheable(value = CACHE_NAME_SEO_KEYWORDS, key = "#post.id.toString().concat('-seoKeywordsAsString')")
     public String getSeoKeywordsAsString(Post post) {
         logger.debug("Get seoKeywordsAsString of post " + post.getId());
 
-        return this.getSeoKeywords(post.getSeoKeywords());
+        return post.getSeoKeywords();
     }
 
     private Post extractPostMeta(Post post) {
@@ -226,20 +210,6 @@ public class PostService {
         return tags;
     }
 
-    public Collection<SeoKeyword> parseSeoKeywords(Post post, String seoKeywords) {
-        Collection<SeoKeyword> keywords = new ArrayList<>();
-
-        if (seoKeywords != null && !seoKeywords.isEmpty()) {
-            seoKeywords = seoKeywords.toLowerCase();
-            String[] names = seoKeywords.split("\\s*,\\s*");
-            for (String name : names) {
-                keywords.add(seoKeywordService.findOrCreateByNameForPost(post, name));
-            }
-        }
-
-        return keywords;
-    }
-
     public String getTagNames(Set<Tag> tags) {
         if (tags == null || tags.isEmpty())
             return "";
@@ -249,18 +219,6 @@ public class PostService {
         names.deleteCharAt(names.length() - 1);
 
         return names.toString();
-    }
-
-    public String getSeoKeywords(Collection<SeoKeyword> seoKeywords) {
-        if (seoKeywords == null || seoKeywords.isEmpty()) {
-            return "";
-        }
-
-        StringBuilder keywords = new StringBuilder();
-        seoKeywords.forEach(kw -> keywords.append(kw.getKeyword()).append(","));
-        keywords.deleteCharAt(keywords.length()-1);
-
-        return keywords.toString();
     }
 
     // cache or not?
