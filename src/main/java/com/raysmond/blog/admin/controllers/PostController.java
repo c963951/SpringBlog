@@ -63,6 +63,9 @@ public class PostController {
     @RequestMapping(value = "new")
     public String newPost(Model model){
         PostForm postForm = DTOUtil.map(new Post(), PostForm.class);
+        postForm.setTitle("");
+        postForm.setPermalink("");
+        postForm.setContent("");
         postForm.setPostTags("");
         postForm.setSeoKeywords("");
 

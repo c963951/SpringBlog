@@ -46,6 +46,17 @@ block content
         .col-sm-3
           span Tags
           input.form-control(name="postTags", value="#{postForm.getPostTags()}")
+
+      hr
+      .row
+        .col-sm-3
+          span Seo Keywords
+          input.form-control(name="seoKeywords", value="#{postForm.getSeoKeywords()}")
+
+        .col-sm-3
+          span Seo Description
+          input.form-control(name="seoDescription", value="#{postForm.getSeoDescription()}")
+
     .item-row
       hr
       button.btn.btn-primary.btn-block(type="submit") Create new post
