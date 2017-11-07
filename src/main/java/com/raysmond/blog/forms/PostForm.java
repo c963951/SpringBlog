@@ -32,4 +32,7 @@ public class PostForm {
     @NotNull
     private String postTags;
 
+    @NotNull
+    private String seoKeywords;
+
 }

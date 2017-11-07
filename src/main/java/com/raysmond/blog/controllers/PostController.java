@@ -53,6 +53,7 @@ public class PostController {
 
         model.addAttribute("post", post);
         model.addAttribute("tags", postService.getPostTags(post));
+        model.addAttribute("seoKeywords", postService.getSeoKeywordsAsString(post));
 
         return "posts/show";
     }

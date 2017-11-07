@@ -3,7 +3,6 @@ package com.raysmond.blog.models;
 import com.raysmond.blog.models.support.PostFormat;
 import com.raysmond.blog.models.support.PostStatus;
 import com.raysmond.blog.models.support.PostType;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
@@ -22,7 +21,7 @@ import java.util.Set;
 @Entity
 @Table(name = "posts")
 @Getter @Setter
-public class Post extends BaseModel{
+public class Post extends BaseModel {
     private static final SimpleDateFormat SLUG_DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
 
     @ManyToOne
@@ -55,6 +54,9 @@ public class Post extends BaseModel{
             inverseJoinColumns = {@JoinColumn(name = "tag_id", nullable = false, updatable = false)}
     )
     private Set<Tag> tags = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.REMOVE)
+    private Collection<SeoKeyword> seoKeywords = new ArrayList<>();
 
     private String permalink;
 

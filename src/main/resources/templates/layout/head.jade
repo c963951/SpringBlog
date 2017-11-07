@@ -6,6 +6,17 @@ meta(name="description", content="#{App.getSiteSlogan()}")
   
 meta(name="author", content="bvn13")
 
+link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+link(rel="icon", href="/favicon.ico", type="image/x-icon")
+
+meta(name="yandex-verification", content="10d4510d1e88a1ed")
+meta(name='wmail-verification', content='4dcdcf694a46ce7015fdfb69eb87b87c')
+meta(name="google-site-verification", content="OmD_S_p2BcdcKepDETH25TRCckl6yVXdkhP6QSfv0RU")
+meta(name="msvalidate.01", content="7FF4CBEF427D306264AD6A092622B438")
+
+if seoKeywords != null && !seoKeywords.isEmpty()
+  meta(name='keywords', content="#{seoKeywords}")
+
 title 
   block title 
     = App.getSiteName()

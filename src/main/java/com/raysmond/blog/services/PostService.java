@@ -3,6 +3,7 @@ package com.raysmond.blog.services;
 import com.raysmond.blog.Constants;
 import com.raysmond.blog.error.NotFoundException;
 import com.raysmond.blog.models.Post;
+import com.raysmond.blog.models.SeoKeyword;
 import com.raysmond.blog.models.Tag;
 import com.raysmond.blog.models.support.PostFormat;
 import com.raysmond.blog.models.support.PostStatus;
@@ -36,10 +37,14 @@ public class PostService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private SeoKeywordService seoKeywordService;
+
     public static final String CACHE_NAME = "cache.post";
     public static final String CACHE_NAME_ARCHIVE = CACHE_NAME + ".archive";
     public static final String CACHE_NAME_PAGE = CACHE_NAME + ".page";
     public static final String CACHE_NAME_TAGS = CACHE_NAME + ".tag";
+    public static final String CACHE_NAME_SEO_KEYWORDS = CACHE_NAME + ".seoKeyword";
     public static final String CACHE_NAME_COUNTS = CACHE_NAME + ".counts_tags";
 
     private static final Logger logger = LoggerFactory.getLogger(PostService.class);
@@ -87,6 +92,7 @@ public class PostService {
             @CacheEvict(value = CACHE_NAME, key = "#post.id"),
             @CacheEvict(value = CACHE_NAME, key = "#post.permalink", condition = "#post.permalink != null"),
             @CacheEvict(value = CACHE_NAME_TAGS, key = "#post.id.toString().concat('-tags')"),
+            @CacheEvict(value = CACHE_NAME_SEO_KEYWORDS, key = "#post.id.toString().concat('-seoKeywords')"),
             @CacheEvict(value = CACHE_NAME_ARCHIVE, allEntries = true),
             @CacheEvict(value = CACHE_NAME_PAGE, allEntries = true),
             @CacheEvict(value = CACHE_NAME_COUNTS, allEntries = true)
@@ -103,6 +109,7 @@ public class PostService {
             @CacheEvict(value = CACHE_NAME, key = "#post.id"),
             @CacheEvict(value = CACHE_NAME, key = "#post.permalink", condition = "#post.permalink != null"),
             @CacheEvict(value = CACHE_NAME_TAGS, key = "#post.id.toString().concat('-tags')"),
+            @CacheEvict(value = CACHE_NAME_SEO_KEYWORDS, key = "#post.id.toString().concat('-seoKeywords')"),
             @CacheEvict(value = CACHE_NAME_ARCHIVE, allEntries = true),
             @CacheEvict(value = CACHE_NAME_PAGE, allEntries = true),
             @CacheEvict(value = CACHE_NAME_COUNTS, allEntries = true)
@@ -139,6 +146,25 @@ public class PostService {
         return tags;
     }
 
+    @Cacheable(value = CACHE_NAME_SEO_KEYWORDS, key = "#post.id.toString().concat('-seoKeywords')")
+    public Collection<SeoKeyword> getSeoKeywords(Post post) {
+        logger.debug("Get seoKeywords of post " + post.getId());
+
+        Collection<SeoKeyword> keywords = new ArrayList<>();
+
+        // Load the post first. If not, when the post is cached before while the seoKeywords not,
+        // then the LAZY loading of post tags will cause an initialization error because
+        // of not hibernate connection session
+        postRepository.findOne(post.getId()).getSeoKeywords().forEach(keywords::add);
+        return keywords;
+    }
+
+    @Cacheable(value = CACHE_NAME_SEO_KEYWORDS, key = "#post.id.toString().concat('-seoKeywordsAsString')")
+    public String getSeoKeywordsAsString(Post post) {
+        logger.debug("Get seoKeywordsAsString of post " + post.getId());
+
+        return this.getSeoKeywords(post.getSeoKeywords());
+    }
 
     private Post extractPostMeta(Post post) {
         Post archivePost = new Post();
@@ -200,6 +226,20 @@ public class PostService {
         return tags;
     }
 
+    public Collection<SeoKeyword> parseSeoKeywords(Post post, String seoKeywords) {
+        Collection<SeoKeyword> keywords = new ArrayList<>();
+
+        if (seoKeywords != null && !seoKeywords.isEmpty()) {
+            seoKeywords = seoKeywords.toLowerCase();
+            String[] names = seoKeywords.split("\\s*,\\s*");
+            for (String name : names) {
+                keywords.add(seoKeywordService.findOrCreateByNameForPost(post, name));
+            }
+        }
+
+        return keywords;
+    }
+
     public String getTagNames(Set<Tag> tags) {
         if (tags == null || tags.isEmpty())
             return "";
@@ -209,6 +249,18 @@ public class PostService {
         names.deleteCharAt(names.length() - 1);
 
         return names.toString();
+    }
+
+    public String getSeoKeywords(Collection<SeoKeyword> seoKeywords) {
+        if (seoKeywords == null || seoKeywords.isEmpty()) {
+            return "";
+        }
+
+        StringBuilder keywords = new StringBuilder();
+        seoKeywords.forEach(kw -> keywords.append(kw.getKeyword()).append(","));
+        keywords.deleteCharAt(keywords.length()-1);
+
+        return keywords.toString();
     }
 
     // cache or not?

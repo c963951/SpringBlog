@@ -2,8 +2,12 @@ meta(charset="utf-8")
 meta(http-equiv="X-UA-Compatible", content="IE=edge")
 meta(name="viewport", content="width=device-width, initial-scale=1")
 
-meta(name="description", content="A simple blog demo with Spring MVC.")
+meta(name="description", content="#{App.getSiteSlogan()}")
 meta(name="author", content="bvn13")
+
+link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+link(rel="icon", href="/favicon.ico", type="image/x-icon")
+
 title #{App.getSiteName()}
 
 link(rel='stylesheet', type='text/css', href='/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css')
