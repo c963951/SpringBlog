@@ -9,7 +9,7 @@ import com.raysmond.blog.models.support.PostFormat;
 import com.raysmond.blog.models.support.PostStatus;
 import com.raysmond.blog.models.support.PostType;
 import com.raysmond.blog.repositories.PostRepository;
-import com.raysmond.blog.utils.Markdown;
+import com.raysmond.blog.support.web.MarkdownService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +36,9 @@ public class PostService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MarkdownService markdownService;
 
     public static final String CACHE_NAME = "cache.post";
     public static final String CACHE_NAME_ARCHIVE = CACHE_NAME + ".archive";
@@ -79,7 +82,7 @@ public class PostService {
     })
     public Post createPost(Post post) {
         if (post.getPostFormat() == PostFormat.MARKDOWN) {
-            post.setRenderedContent(Markdown.markdownToHtml(post.getContent()));
+            post.setRenderedContent(markdownService.renderToHtml(post.getContent()));
         }
 
         return postRepository.save(post);
@@ -96,7 +99,7 @@ public class PostService {
     })
     public Post updatePost(Post post) {
         if (post.getPostFormat() == PostFormat.MARKDOWN) {
-            post.setRenderedContent(Markdown.markdownToHtml(post.getContent()));
+            post.setRenderedContent(markdownService.renderToHtml(post.getContent()));
         }
 
         return postRepository.save(post);

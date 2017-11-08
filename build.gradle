@@ -7,7 +7,7 @@ apply plugin: 'spring-boot'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = '2.4'
+version = '2.5'
 
 repositories {
     mavenLocal()
@@ -60,8 +60,11 @@ dependencies {
     compile 'org.pegdown:pegdown:1.6.0'
 
     // python
-    compile 'org.python:jython-standalone:2.7.1'
-    compile 'org.pygments:pygments:2.2.0'
+    //compile 'org.python:jython-standalone:2.7.1'
+    //compile 'org.pygments:pygments:2.2.0'
+
+    //markdown processor
+    compile 'com.vladsch.flexmark:flexmark-all:0.27.0'
 
     // spring data
     compile 'org.springframework.data:spring-data-jpa:1.11.8.RELEASE'
