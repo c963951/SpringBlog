@@ -26,6 +26,7 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 #### 2017-11-08
 
 * Added sharing buttons via [sharethis.com](https://platform.sharethis.com) - register and change verification code to use it
+* Removed deprecated Jython, Pygments and Pegdown. Replaced with [Flexmark](https://github.com/vsch/flexmark-java) and [github-markdown-css](https://github.com/sindresorhus/github-markdown-css) 
 
 #### 2017-11-07
 
