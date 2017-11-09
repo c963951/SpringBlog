@@ -2,14 +2,13 @@ SpringBlog
 =====
 
 SpringBlog is a very simple and clean-design blog system implemented with Spring Boot.
-It's one of my learning projects to explore awesome features in Spring Boot web programming. I had put it on production
-for my personal [bvn13's blog](https://bvn13.tk) on 2017-11-03. 
+I had put it on production for my personal [bvn13's blog](https://bvn13.tk) since 2017-11-03. 
 
 
 SpringBlog is powered by many powerful frameworks and third-party projects:
 
 - Spring Boot and many of Spring familiy (e.g. Spring MVC, Spring JPA, Spring Secruity and etc)
-- Hibernate + MySQL
+- Hibernate + PostgreSQL
 - [HikariCP](https://github.com/brettwooldridge/HikariCP) - A solid high-performance JDBC connection pool
 - [Bootstrap](https://getbootstrap.com) - A very popular and responsive front-end framework
 - [Pegdown](https://github.com/sirthias/pegdown) - ~~A pure-java markdown processor~~ **(depricated)**
