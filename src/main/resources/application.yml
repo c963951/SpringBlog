@@ -4,13 +4,13 @@ server:
 
 spring:
     profiles:
-        active: dev
+      active: dev
 
     thymeleaf:
-        cache: false
+      cache: false
 
     jade4j:
-        caching: false
+      caching: false
 
     dataSource:
       driverClassName: org.postgresql.Driver
@@ -33,3 +33,9 @@ spring:
 
     session:
       store-type: redis
+
+    http:
+      multipart:
+        max-file-size: 100Mb
+        max-request-size: 100Mb
+

@@ -30,6 +30,9 @@ public class User extends BaseModel {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
     private Collection<Post> posts = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
+    private Collection<StoredFile> storedFiles = new ArrayList<>();
+
     public User() {
 
     }

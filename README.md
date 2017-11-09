@@ -23,6 +23,10 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 
 ## Changelog
 
+#### 2017-11-09
+
+* Implemented files uploads/downloads
+
 #### 2017-11-08
 
 * Added sharing buttons via [sharethis.com](https://platform.sharethis.com) - register and change verification code to use it

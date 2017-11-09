@@ -23,4 +23,13 @@
 	<logger name="org.hibernate.type" level="TRACE">
 		<appender-ref ref="STDOUT" />
 	</logger>
+	<logger name="org.springframework.web" level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="com.raysmond.blog.controllers" level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="com.raysmond.blog.admin.controllers" level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</logger>
 </configuration>

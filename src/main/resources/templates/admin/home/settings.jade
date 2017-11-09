@@ -21,8 +21,12 @@ block content
           td.setting-label Page Size 
           td.input 
             input.form-control(type="text", name="pageSize", value="#{settings.getPageSize()}")
-      
         tr
+          td.setting-label Storage path
+          td.input
+            input.form-control(type="text", name="storagePath", value="#{settings.getStoragePath()}")
+
+      tr
           td.setting-label 
           td.input 
             input.btn.btn-primary(type="submit", value="Save") 

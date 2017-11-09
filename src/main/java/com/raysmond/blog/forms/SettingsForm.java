@@ -20,4 +20,7 @@ public class SettingsForm {
     @NotNull
     private Integer pageSize;
 
+    @NotNull
+    private String storagePath;
+
 }

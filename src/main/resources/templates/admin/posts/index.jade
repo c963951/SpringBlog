@@ -31,7 +31,7 @@ block content
               td #{post.getCreatedAt()}
               td #{post.getUpdatedAt()}
               td.operations
-                a.btn.btn-xs.btn-info(href="/posts/#{post.getId()}", target:'_blank')
+                a.btn.btn-xs.btn-info(href="/posts/#{post.getId()}", target='_blank')
                   i.fa.fa-eye
                 a.btn.btn-xs.btn-primary(href="/admin/posts/#{post.getId()}/edit")
                   i.fa.fa-edit
@@ -42,6 +42,8 @@ block content
                   input(type="hidden", name='_csrf', value='#{_csrf.token}')
       .col-sm-12
         div#pagination
+
+
   script
     :javascript
       function deletePost(postId){

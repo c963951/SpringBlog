@@ -17,10 +17,12 @@ public class AppSetting {
     private String siteName = "SpringBlog";
     private String siteSlogan = "An interesting place to discover";
     private Integer pageSize = 5;
+    private String storagePath = "/tmp";
 
     public static final String SITE_NAME = "site_name";
     public static final String SITE_SLOGAN = "site_slogan";
     public static final String PAGE_SIZE = "page_size";
+    public static final String STORAGE_PATH = "storage_path";
 
     @Autowired
     public AppSetting(SettingService settingService){
@@ -52,5 +54,14 @@ public class AppSetting {
     public void setSiteSlogan(String siteSlogan) {
         this.siteSlogan = siteSlogan;
         settingService.put(SITE_SLOGAN, siteSlogan);
+    }
+
+    public String getStoragePath() {
+        return (String) settingService.get(STORAGE_PATH, storagePath);
+    }
+
+    public void setStoragePath(String storagePath) {
+        this.storagePath = storagePath;
+        settingService.put(STORAGE_PATH, storagePath);
     }
 }

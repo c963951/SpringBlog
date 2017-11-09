@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
 
 /**
  * @author Raysmond<i@raysmond.com>
@@ -14,7 +15,7 @@ import org.springframework.cache.annotation.EnableCaching;
 // 开启缓存请把下行取消注释
 // Open the cache Please uncomment the downlink
 //@EnableCaching
-public class Application extends SpringBootServletInitializer {
+public class Application {
 
     public static void main(String[] args) {
         SLF4JBridgeHandler.removeHandlersForRootLogger();
@@ -23,11 +24,4 @@ public class Application extends SpringBootServletInitializer {
         SpringApplication.run(Application.class, args);
     }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        SLF4JBridgeHandler.removeHandlersForRootLogger();
-        SLF4JBridgeHandler.install();
-
-        return application.sources(Application.class);
-    }
 }
