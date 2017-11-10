@@ -50,6 +50,7 @@ public class AdminController {
             appSetting.setSiteSlogan(settingsForm.getSiteSlogan());
             appSetting.setPageSize(settingsForm.getPageSize());
             appSetting.setStoragePath(settingsForm.getStoragePath());
+            appSetting.setMainUri(settingsForm.getMainUri());
 
             MessageHelper.addSuccessAttribute(ra, "Update settings successfully.");
 

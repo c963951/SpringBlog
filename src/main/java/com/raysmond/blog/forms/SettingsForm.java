@@ -23,4 +23,7 @@ public class SettingsForm {
     @NotNull
     private String storagePath;
 
+    @NotNull
+    private String mainUri;
+
 }

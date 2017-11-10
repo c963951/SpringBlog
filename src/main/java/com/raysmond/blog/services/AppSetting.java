@@ -18,11 +18,13 @@ public class AppSetting {
     private String siteSlogan = "An interesting place to discover";
     private Integer pageSize = 5;
     private String storagePath = "/tmp";
+    private String mainUri = "http://localhost/";
 
     public static final String SITE_NAME = "site_name";
     public static final String SITE_SLOGAN = "site_slogan";
     public static final String PAGE_SIZE = "page_size";
     public static final String STORAGE_PATH = "storage_path";
+    public static final String MAIN_URI = "main_uri";
 
     @Autowired
     public AppSetting(SettingService settingService){
@@ -64,4 +66,14 @@ public class AppSetting {
         this.storagePath = storagePath;
         settingService.put(STORAGE_PATH, storagePath);
     }
+
+    public String getMainUri() {
+        return (String) settingService.get(MAIN_URI, mainUri);
+    }
+
+    public void setMainUri(String mainUri) {
+        this.mainUri = mainUri;
+        settingService.put(MAIN_URI, mainUri);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.raysmond.blog.services;
 
 import com.raysmond.blog.models.Post;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Attr;
@@ -24,7 +25,13 @@ public class SeoService {
 
     public static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
+    @Autowired
+    private AppSetting appSetting;
+
+
     public String createSitemap(List<Post> posts) {
+
+        String slash = appSetting.getMainUri().trim().endsWith("/") ? "" : "/";
 
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -39,7 +46,7 @@ public class SeoService {
                 Element url = doc.createElement("url");
                 //loc
                 Element loc = doc.createElement("loc");
-                loc.appendChild(doc.createTextNode(String.format("/posts/%s", post.getPermalink() == null || post.getPermalink().isEmpty() ? post.getId() : post.getPermalink())));
+                loc.appendChild(doc.createTextNode(String.format("%s%sposts/%s", appSetting.getMainUri().trim(), slash, post.getPermalink() == null || post.getPermalink().isEmpty() ? post.getId() : post.getPermalink())));
                 url.appendChild(loc);
                 //lastmod
                 //yyyy-MM-dd'T'HH:mm:ss
