@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 public class SeoService {
 
-    public static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+    public static final SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
 
     @Autowired
     private AppSetting appSetting;
