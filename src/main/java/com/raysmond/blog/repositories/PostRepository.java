@@ -26,6 +26,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Page<Post> findAllByPostTypeAndPostStatus(PostType postType, PostStatus postStatus, Pageable pageRequest);
 
+    List<Post> findAllByPostTypeAndPostStatus(PostType postType, PostStatus postStatus);
+
     @Query("SELECT p FROM Post p INNER JOIN p.tags t WHERE t.name = :tag")
     Page<Post> findByTag(@Param("tag") String tag, Pageable pageable);
 

@@ -173,6 +173,12 @@ public class PostService {
                 new PageRequest(page, pageSize, Sort.Direction.DESC, "createdAt"));
     }
 
+    public List<Post> getAllPublishedPosts() {
+        logger.debug("Get all published posts");
+
+        return this.postRepository.findAllByPostTypeAndPostStatus(PostType.POST, PostStatus.PUBLISHED);
+    }
+
     public Post createAboutPage() {
         logger.debug("Create default about page");
 

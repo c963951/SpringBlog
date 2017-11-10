@@ -22,6 +22,10 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 
 ## Changelog
 
+#### 2017-11-11
+
+* Implemented /seo/sitemap.xml file containing information about all published posts
+
 #### 2017-11-09
 
 * Implemented files uploads/downloads
