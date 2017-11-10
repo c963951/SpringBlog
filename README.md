@@ -11,9 +11,9 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 - Hibernate + PostgreSQL
 - [HikariCP](https://github.com/brettwooldridge/HikariCP) - A solid high-performance JDBC connection pool
 - [Bootstrap](https://getbootstrap.com) - A very popular and responsive front-end framework
-- [Pegdown](https://github.com/sirthias/pegdown) - ~~A pure-java markdown processor~~ **(depricated)**
+- [Pegdown](https://github.com/sirthias/pegdown) - ~~A pure-java markdown processor~~ **(deprecated)**
 - [ACE Editor](http://ace.c9.io/) - A high performance code editor which I use to write posts and code.
-- [Pygments](http://pygments.org/) - ~~A python library for highlighting code syntax~~ **(depricated)**
+- [Pygments](http://pygments.org/) - ~~A python library for highlighting code syntax~~ **(deprecated)**
 - [Flexmark](https://github.com/vsch/flexmark-java) - Java implementation of CommonMark 0.28 spec parser using the blocks first, inlines after Markdown parsing architecture
 - [Jade4j](https://github.com/neuland/jade4j) - [Jade](http://jade-lang.com/) is an elegant template language.
 - [Webjars](http://www.webjars.org/) - A client-side web libraries packaged into JAR files. A easy way to manage JavaScript and CSS vendors in Gradle.
