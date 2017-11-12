@@ -22,7 +22,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_OCTET_STREAM_VA
 
 
 @Controller
-@RequestMapping("/file")
+@RequestMapping("/files")
 public class StoredFileController {
 
     @Autowired
