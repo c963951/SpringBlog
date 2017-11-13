@@ -24,7 +24,7 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 
 #### 2017-11-14
 
-* Added checkbox RememberMe into login form, checked functionality, increased RememberMe cookie timeout upto 7 days
+* Added RememberMe checkbox into login form, increased RememberMe cookie timeout upto 7 days
 
 #### 2017-11-13
 
