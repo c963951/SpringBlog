@@ -22,6 +22,11 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 
 ## Changelog
 
+#### 2017-11-13
+
+* Draft posts are hidden now by direct link
+* Prevented creating admin user from constants if email of admin was changed from the database
+
 #### 2017-11-11
 
 * Implemented /seo/sitemap.xml file containing information about all published posts
