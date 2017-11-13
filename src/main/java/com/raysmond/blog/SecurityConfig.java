@@ -20,7 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public TokenBasedRememberMeServices rememberMeServices() {
-        return new TokenBasedRememberMeServices("remember-me-key", userService());
+        TokenBasedRememberMeServices services = new TokenBasedRememberMeServices("remember-me-secret", userService());
+        services.setTokenValiditySeconds(60*60*24*7); //NB: set timeout here
+        return services;
     }
 
     @Bean
@@ -58,6 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .rememberMe()
                 .rememberMeServices(rememberMeServices())
-                .key("remember-me-key");
+                .key("remember-me-secret")
+                //.tokenValiditySeconds(60*60) //NB: Not here
+                ;
     }
 }

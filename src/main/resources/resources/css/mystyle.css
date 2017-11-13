@@ -31,3 +31,8 @@ img {
     /* use same as in theme */
     font-family: "Helvetica Neue", Helvetica, "Microsoft Yahei", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans !important;
 }
+
+.col-centered {
+    margin: 0 auto;
+    float: none;
+}
