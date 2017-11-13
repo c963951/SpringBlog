@@ -22,6 +22,8 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Long> {
     Post findByPermalinkAndPostStatus(String permalink, PostStatus postStatus);
 
+    Post findByIdAndPostStatus(Long postId, PostStatus postStatus);
+
     Page<Post> findAllByPostType(PostType postType, Pageable pageRequest);
 
     Page<Post> findAllByPostTypeAndPostStatus(PostType postType, PostStatus postStatus, Pageable pageRequest);

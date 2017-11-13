@@ -41,7 +41,7 @@ public class PostController {
             post = postService.getPublishedPostByPermalink(permalink);
         } catch (NotFoundException ex){
             if (permalink.matches("\\d+")) {
-                post = postService.getPost(Long.valueOf(permalink));
+                post = postService.getPublishedPost(Long.valueOf(permalink));
             } else if (permalink.toLowerCase().trim().equals(Constants.PROJECTS_PAGE_PERMALINK)) {
                 post = postService.createProjectsPage();
             }

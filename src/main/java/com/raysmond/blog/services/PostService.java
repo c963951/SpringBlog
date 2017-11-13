@@ -63,6 +63,19 @@ public class PostService {
     }
 
     @Cacheable(CACHE_NAME)
+    public Post getPublishedPost(Long postId) {
+        logger.debug("Get published post " + postId);
+
+        Post post = this.postRepository.findByIdAndPostStatus(postId, PostStatus.PUBLISHED);
+
+        if (post == null) {
+            throw new NotFoundException("Post with id " + postId + " is not found.");
+        }
+
+        return post;
+    }
+
+    @Cacheable(CACHE_NAME)
     public Post getPublishedPostByPermalink(String permalink) {
         logger.debug("Get post with permalink " + permalink);
 
