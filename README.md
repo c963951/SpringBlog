@@ -22,6 +22,10 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 
 ## Changelog
 
+#### 2017-11-14
+
+* Added checkbox RememberMe into login form, checked functionality, increased RememberMe cookie timeout upto 7 days
+
 #### 2017-11-13
 
 * Draft posts are hidden now by direct link
