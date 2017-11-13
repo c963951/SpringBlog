@@ -1,6 +1,7 @@
 package com.raysmond.blog.services;
 
 import java.util.Collections;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -23,13 +24,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @JadeHelper("userService")
 public class UserService implements UserDetailsService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     @Autowired
     private UserRepository userRepository;
 
     @Inject
     private PasswordEncoder passwordEncoder;
-
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @PostConstruct
     protected void initialize() {
@@ -41,10 +42,18 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public User getSuperUser(){
+    public User getSuperUser() {
+        List<User> superUsers = this.userRepository.findAllByRoleOrderById(User.ROLE_ADMIN);
+        if (superUsers == null || superUsers.size() == 0) {
+            return this.getDefaultSuperUser();
+        }
+        return superUsers.get(0);
+    }
+
+    public User getDefaultSuperUser(){
         User user = userRepository.findByEmail(Constants.DEFAULT_ADMIN_EMAIL);
 
-        if ( user == null) {
+        if (user == null) {
             user = createUser(new User(Constants.DEFAULT_ADMIN_EMAIL, Constants.DEFAULT_ADMIN_PASSWORD, User.ROLE_ADMIN));
         }
 
