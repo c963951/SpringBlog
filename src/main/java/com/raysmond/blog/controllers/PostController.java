@@ -5,6 +5,7 @@ import com.raysmond.blog.error.NotFoundException;
 import com.raysmond.blog.models.Post;
 import com.raysmond.blog.services.PostService;
 import com.raysmond.blog.services.TagService;
+import com.raysmond.blog.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +24,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Controller
 @RequestMapping("posts")
 public class PostController {
+
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "archive", method = GET)
     public String archive(Model model){
@@ -38,12 +43,16 @@ public class PostController {
         Post post = null;
 
         try{
-            post = postService.getPublishedPostByPermalink(permalink);
+            post = this.postService.getPublishedPostByPermalink(permalink);
         } catch (NotFoundException ex){
             if (permalink.matches("\\d+")) {
-                post = postService.getPublishedPost(Long.valueOf(permalink));
+                if (this.userService.currentUser().isAdmin()) {
+                    post = this.postService.getPost(Long.valueOf(permalink));
+                } else {
+                    post = this.postService.getPublishedPost(Long.valueOf(permalink));
+                }
             } else if (permalink.toLowerCase().trim().equals(Constants.PROJECTS_PAGE_PERMALINK)) {
-                post = postService.createProjectsPage();
+                post = this.postService.createProjectsPage();
             }
         }
 
@@ -52,8 +61,8 @@ public class PostController {
         }
 
         model.addAttribute("post", post);
-        model.addAttribute("tags", postService.getPostTags(post));
-        model.addAttribute("seoKeywords", postService.getSeoKeywordsAsString(post));
+        model.addAttribute("tags", this.postService.getPostTags(post));
+        model.addAttribute("seoKeywords", this.postService.getSeoKeywordsAsString(post));
         model.addAttribute("seoDescription", post.getSeoDescription());
 
         return "posts/show";
