@@ -17,7 +17,7 @@ img {
     min-width: 200px;
     max-width: 980px;
     margin: 0 auto;
-    padding: 45px;
+    padding: 15px;
     font-family: none !important;
 }
 
@@ -36,3 +36,8 @@ img {
     margin: 0 auto;
     float: none;
 }
+
+.post {
+    padding-top: 0px !important;
+}
+
