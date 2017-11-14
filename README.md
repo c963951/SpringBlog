@@ -18,13 +18,14 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 - [Jade4j](https://github.com/neuland/jade4j) - [Jade](http://jade-lang.com/) is an elegant template language.
 - [Webjars](http://www.webjars.org/) - A client-side web libraries packaged into JAR files. A easy way to manage JavaScript and CSS vendors in Gradle.
 - [Redis](http://redis.io/) - A very powerful in-memory data cache server.
-- [github-markdown-css](https://github.com/sindresorhus/github-markdown-css) - markdown syntax highlighter
+- [Prism](http://prismjs.com) - syntax highlighter
 
 ## Changelog
 
 #### 2017-11-14
 
 * Added RememberMe checkbox into login form, increased RememberMe cookie timeout upto 7 days
+* Added Prism syntax highlighter instead of github-markdown-css
 
 #### 2017-11-13
 
