@@ -25,6 +25,9 @@ img {
     .markdown-body {
         padding: 15px;
     }
+    .header-title {
+        padding: 0px;
+    }
 }
 
 .my-font {

@@ -46,7 +46,7 @@ public class StoredFileController {
             content = this.storageService.getFileContent(file.getPath());
         } catch (IOException e) {
             e.printStackTrace();
-            if (this.userService.currentUser().isAdmin()) {
+            if (this.userService.isCurrentUserAdmin()) {
                 response.sendError(404, String.format("File %s (%s) not found", file.getName(), file.getPath()));
             } else {
                 response.sendError(404, String.format("File %s not found", file.getName()));

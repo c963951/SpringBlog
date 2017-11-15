@@ -80,6 +80,12 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
+    public Boolean isCurrentUserAdmin() {
+        User user = this.currentUser();
+        Boolean isAdmin = user != null ? user.isAdmin() : false;
+        return isAdmin;
+    }
+
     public boolean changePassword(User user, String password, String newPassword){
         if (password == null || newPassword == null || password.isEmpty() || newPassword.isEmpty())
             return false;

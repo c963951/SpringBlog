@@ -5,6 +5,7 @@ import com.raysmond.blog.error.NotFoundException;
 import com.raysmond.blog.models.Post;
 import com.raysmond.blog.models.SeoKeyword;
 import com.raysmond.blog.models.Tag;
+import com.raysmond.blog.models.User;
 import com.raysmond.blog.models.support.PostFormat;
 import com.raysmond.blog.models.support.PostStatus;
 import com.raysmond.blog.models.support.PostType;
@@ -279,7 +280,7 @@ public class PostService {
             post = this.getPublishedPostByPermalink(permalink);
         } catch (NotFoundException ex){
             if (permalink.matches("\\d+")) {
-                if (this.userService.currentUser().isAdmin()) {
+                if (this.userService.isCurrentUserAdmin()) {
                     post = this.getPost(Long.valueOf(permalink));
                 } else {
                     post = this.getPublishedPost(Long.valueOf(permalink));
