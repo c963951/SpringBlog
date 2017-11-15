@@ -3,15 +3,16 @@ package com.raysmond.blog.controllers;
 import com.raysmond.blog.Constants;
 import com.raysmond.blog.error.NotFoundException;
 import com.raysmond.blog.models.Post;
-import com.raysmond.blog.services.PostService;
-import com.raysmond.blog.services.TagService;
-import com.raysmond.blog.services.UserService;
+import com.raysmond.blog.services.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Set;
 
@@ -25,11 +26,23 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("posts")
 public class PostController {
 
+    Logger logger = LoggerFactory.getLogger(PostController.class);
+
     @Autowired
     private PostService postService;
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private VisitService visitService;
+
+    @Autowired
+    private LikeService likeService;
+
+    @Autowired
+    private RequestProcessorService requestProcessorService;
+
 
     @RequestMapping(value = "archive", method = GET)
     public String archive(Model model){
@@ -39,26 +52,14 @@ public class PostController {
     }
 
     @RequestMapping(value = "{permalink}", method = GET)
-    public String show(@PathVariable String permalink, Model model){
-        Post post = null;
+    public String show(@PathVariable String permalink, Model model, HttpServletRequest request){
+        Post post = this.postService.findPostByPermalink(permalink);
 
-        try{
-            post = this.postService.getPublishedPostByPermalink(permalink);
-        } catch (NotFoundException ex){
-            if (permalink.matches("\\d+")) {
-                if (this.userService.currentUser().isAdmin()) {
-                    post = this.postService.getPost(Long.valueOf(permalink));
-                } else {
-                    post = this.postService.getPublishedPost(Long.valueOf(permalink));
-                }
-            } else if (permalink.toLowerCase().trim().equals(Constants.PROJECTS_PAGE_PERMALINK)) {
-                post = this.postService.createProjectsPage();
-            }
-        }
+        logger.debug(String.format("ACCESS %s from IP: %s", permalink, this.requestProcessorService.getRealIp(request)));
 
-        if (post == null) {
-            throw new NotFoundException("Post with permalink " + permalink + " is not found");
-        }
+        this.visitService.saveVisit(this.requestProcessorService.getRealIp(request), post);
+        post.setVisitsCount(this.visitService.getUniqueVisitsCount(post));
+        post.setSympathyCount(this.likeService.getTotalLikesByPost(post));
 
         model.addAttribute("post", post);
         model.addAttribute("tags", this.postService.getPostTags(post));

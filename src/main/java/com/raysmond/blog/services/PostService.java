@@ -40,6 +40,13 @@ public class PostService {
     @Autowired
     private MarkdownService markdownService;
 
+    @Autowired
+    private LikeService likeService;
+
+    @Autowired
+    private VisitService visitService;
+
+
     public static final String CACHE_NAME = "cache.post";
     public static final String CACHE_NAME_ARCHIVE = CACHE_NAME + ".archive";
     public static final String CACHE_NAME_PAGE = CACHE_NAME + ".page";
@@ -173,6 +180,9 @@ public class PostService {
         archivePost.setPermalink(post.getPermalink());
         archivePost.setCreatedAt(post.getCreatedAt());
 
+        archivePost.setSympathyCount(this.likeService.getTotalLikesByPost(post));
+        archivePost.setVisitsCount(this.visitService.getUniqueVisitsCount(post));
+
         return archivePost;
     }
 
@@ -180,10 +190,17 @@ public class PostService {
     public Page<Post> getAllPublishedPostsByPage(int page, int pageSize) {
         logger.debug("Get posts by page " + page);
 
-        return postRepository.findAllByPostTypeAndPostStatus(
+        Page<Post> posts = postRepository.findAllByPostTypeAndPostStatus(
                 PostType.POST,
                 PostStatus.PUBLISHED,
                 new PageRequest(page, pageSize, Sort.Direction.DESC, "createdAt"));
+
+        posts.forEach(p -> {
+            p.setSympathyCount(this.likeService.getTotalLikesByPost(p));
+            p.setVisitsCount(this.visitService.getUniqueVisitsCount(p));
+        });
+
+        return posts;
     }
 
     public List<Post> getAllPublishedPosts() {
@@ -254,4 +271,29 @@ public class PostService {
 
         return postRepository.countPostsByTags(PostStatus.PUBLISHED);
     }
+
+    public Post findPostByPermalink(String permalink) {
+        Post post = null;
+
+        try{
+            post = this.getPublishedPostByPermalink(permalink);
+        } catch (NotFoundException ex){
+            if (permalink.matches("\\d+")) {
+                if (this.userService.currentUser().isAdmin()) {
+                    post = this.getPost(Long.valueOf(permalink));
+                } else {
+                    post = this.getPublishedPost(Long.valueOf(permalink));
+                }
+            } else if (permalink.toLowerCase().trim().equals(Constants.PROJECTS_PAGE_PERMALINK)) {
+                post = this.createProjectsPage();
+            }
+        }
+
+        if (post == null) {
+            throw new NotFoundException("Post with permalink " + permalink + " is not found");
+        }
+
+        return post;
+    }
+
 }

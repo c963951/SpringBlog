@@ -75,4 +75,15 @@ public class Post extends BaseModel {
         this.permalink = StringUtils.arrayToDelimitedString(StringUtils.tokenizeToStringArray(token, " "), "-");
     }
 
+    private Long visitsCount = 0L;
+    public Long getVisitsCount() {
+        if (this.visitsCount == null) return 0L;
+        else return this.visitsCount;
+    }
+
+    private Integer sympathyCount = 0;
+    public Integer getSympathyCount() {
+        if (this.sympathyCount == null) return 0;
+        else return this.sympathyCount;
+    }
 }

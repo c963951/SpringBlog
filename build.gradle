@@ -7,7 +7,7 @@ apply plugin: 'spring-boot'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = '2.6.2'
+version = '2.7.0'
 
 repositories {
     mavenLocal()
@@ -59,10 +59,6 @@ dependencies {
     compile 'de.neuland-bfi:spring-jade4j:1.2.7'
     compile 'org.pegdown:pegdown:1.6.0'
 
-    // python
-    //compile 'org.python:jython-standalone:2.7.1'
-    //compile 'org.pygments:pygments:2.2.0'
-
     //markdown processor
     compile 'com.vladsch.flexmark:flexmark-all:0.27.0'
 
@@ -99,6 +95,9 @@ dependencies {
     compile 'org.modelmapper:modelmapper:1.1.1'
     compile 'org.projectlombok:lombok:1.16.16'
     //compile 'com.qiniu:qiniu-java-sdk:7.0.+'
+
+    // JSON support
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.2'
 
     // static resources, ref. http://www.webjars.org/
     compile 'org.webjars:jquery:3.2.1'

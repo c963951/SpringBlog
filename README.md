@@ -22,6 +22,11 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 
 ## Changelog
 
+#### 2017-11-15
+
+* Implemented visitors counting (depends on X-Real-IP header)
+* Implemented likes/dislikes (depends on X-Real-IP header)
+
 #### 2017-11-14
 
 * Added RememberMe checkbox into login form, increased RememberMe cookie timeout upto 7 days

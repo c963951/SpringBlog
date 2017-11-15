@@ -21,7 +21,8 @@ block content
     .post-item
       a(href="/posts/#{post.getPermalink().length() > 0 ? post.getPermalink() : post.getId()}")
         h2 #{post.getTitle()}
-        .meta
+      include ../posts/fragments/socialReadonly
+      .meta
           span #{viewHelper.getFormattedDate(post.getCreatedAt())}
 
   .loadmore

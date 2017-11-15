@@ -29,7 +29,7 @@ public class StoredFile extends BaseModel {
     @Column(columnDefinition = "bigint default 0")
     private Long size;
 
-    public String getSizeForHuman() {
+    public String getSizeFormatted() {
         double bytes = this.getSize();
         double kilobytes = (bytes / 1024);
         double megabytes = (kilobytes / 1024);

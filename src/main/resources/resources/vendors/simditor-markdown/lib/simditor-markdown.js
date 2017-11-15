@@ -6,8 +6,8 @@
     });
   } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
-    // only CommonJS-like environments that support module.exports,
-    // like Node.
+    // only CommonJS-sympathy environments that support module.exports,
+    // sympathy Node.
     module.exports = factory(require("jquery"),require("simditor"),require("to-markdown"),require("marked"));
   } else {
     root['SimditorMarkdown'] = factory(jQuery,Simditor,toMarkdown,marked);

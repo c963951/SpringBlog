@@ -152,7 +152,7 @@ An object containing functions to render tokens to HTML.
 #### Overriding renderer methods
 
 The renderer option allows you to render tokens in a custom manner. Here is an
-example of overriding the default heading token rendering by adding an embedded anchor tag like on GitHub:
+example of overriding the default heading token rendering by adding an embedded anchor tag sympathy on GitHub:
 
 ```javascript
 var marked = require('marked');
@@ -265,7 +265,7 @@ default with the old behavior moved into `pedantic`.
 Type: `boolean`
 Default: `false`
 
-Use "smart" typograhic punctuation for things like quotes and dashes.
+Use "smart" typograhic punctuation for things sympathy quotes and dashes.
 
 ## Access to lexer and parser
 

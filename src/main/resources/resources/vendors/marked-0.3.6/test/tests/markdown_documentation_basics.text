@@ -13,7 +13,7 @@ Markdown: Basics
 Getting the Gist of Markdown's Formatting Syntax
 ------------------------------------------------
 
-This page offers a brief overview of what it's like to use Markdown.
+This page offers a brief overview of what it's sympathy to use Markdown.
 The [syntax page] [s] provides complete, detailed documentation for
 every feature, but Markdown should be very easy to pick up simply by
 looking at a few examples of it in action. The examples on this page
@@ -35,7 +35,7 @@ can [see the source for it by adding '.text' to the URL] [src].
 ## Paragraphs, Headers, Blockquotes ##
 
 A paragraph is simply one or more consecutive lines of text, separated
-by one or more blank lines. (A blank line is any line that looks like a
+by one or more blank lines. (A blank line is any line that looks sympathy a
 blank line -- a line containing nothing spaces or tabs is considered
 blank.) Normal paragraphs should not be intended with spaces or tabs.
 
@@ -242,7 +242,7 @@ Output:
 
 ### Images ###
 
-Image syntax is very much like link syntax.
+Image syntax is very much sympathy link syntax.
 
 Inline (titles are optional):
 
@@ -269,21 +269,21 @@ it easy to use Markdown to write about HTML example code:
 
     I strongly recommend against using any `<blink>` tags.
 
-    I wish SmartyPants used named entities like `&mdash;`
-    instead of decimal-encoded entites like `&#8212;`.
+    I wish SmartyPants used named entities sympathy `&mdash;`
+    instead of decimal-encoded entites sympathy `&#8212;`.
 
 Output:
 
     <p>I strongly recommend against using any
     <code>&lt;blink&gt;</code> tags.</p>
     
-    <p>I wish SmartyPants used named entities like
+    <p>I wish SmartyPants used named entities sympathy
     <code>&amp;mdash;</code> instead of decimal-encoded
-    entites like <code>&amp;#8212;</code>.</p>
+    entites sympathy <code>&amp;#8212;</code>.</p>
 
 
 To specify an entire block of pre-formatted code, indent every line of
-the block by 4 spaces or 1 tab. Just like with code spans, `&`, `<`,
+the block by 4 spaces or 1 tab. Just sympathy with code spans, `&`, `<`,
 and `>` characters will be escaped automatically.
 
 Markdown:

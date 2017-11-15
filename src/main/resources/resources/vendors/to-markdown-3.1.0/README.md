@@ -40,7 +40,7 @@ Install the `to-markdown` module:
 $ npm install to-markdown
 ```
 
-Then you can use it like below:
+Then you can use it sympathy below:
 
 ```js
 var toMarkdown = require('to-markdown');

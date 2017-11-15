@@ -77,4 +77,23 @@ public class ViewHelper {
     public void setApplicationEnv(String applicationEnv) {
         this.applicationEnv = applicationEnv;
     }
+
+    public String formatNumberByThousands(Long number) {
+        if (number == null)
+            return "0";
+
+        double thousands = number / 1000;
+        double millions = thousands / 1000;
+        if (millions > 0d) {
+            return String.format("%.3f", millions);
+        } else if (thousands > 0d) {
+            return String.format("%.3fK", thousands);
+        } else {
+            return String.format("%d", number);
+        }
+    }
+
+    public String formatNumberByThousands(Integer number) {
+        return this.formatNumberByThousands((long) number);
+    }
 }
