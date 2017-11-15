@@ -1,6 +1,7 @@
 package com.raysmond.blog.services;
 
 import com.raysmond.blog.models.Post;
+import com.raysmond.blog.models.User;
 import com.raysmond.blog.models.Visit;
 import com.raysmond.blog.repositories.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,13 @@ public class VisitService {
 //        if (this.userService.currentUser().isAdmin())
 //            return;
 
+        User user = this.userService.currentUser();
+
         Visit visit = new Visit();
         visit.setClientIp(clientIp);
         visit.setPost(post);
-        visit.setUser(this.userService.currentUser());
-        visit.setIsAdmin(this.userService.currentUser().isAdmin());
+        visit.setUser(user);
+        visit.setIsAdmin(user != null ? user.isAdmin() : false);
         this.visitRepository.save(visit);
     }
 
