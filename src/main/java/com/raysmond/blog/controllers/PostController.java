@@ -57,7 +57,7 @@ public class PostController {
 
         logger.debug(String.format("ACCESS %s from IP: %s", permalink, this.requestProcessorService.getRealIp(request)));
 
-        this.visitService.saveVisit(this.requestProcessorService.getRealIp(request), post);
+        this.visitService.saveVisit(post, this.requestProcessorService.getRealIp(request), this.requestProcessorService.getUserAgent(request));
         post.setVisitsCount(this.visitService.getUniqueVisitsCount(post));
         post.setSympathyCount(this.likeService.getTotalLikesByPost(post));
 

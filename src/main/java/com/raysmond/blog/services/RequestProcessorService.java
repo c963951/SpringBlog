@@ -15,4 +15,9 @@ public class RequestProcessorService {
         return xRealIp;
     }
 
+    public String getUserAgent(HttpServletRequest request) {
+        String userAgent = request.getHeader("User-Agent");
+        return userAgent;
+    }
+
 }

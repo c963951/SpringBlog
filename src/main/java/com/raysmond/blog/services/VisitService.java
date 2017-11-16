@@ -16,7 +16,7 @@ public class VisitService {
     @Autowired
     private UserService userService;
 
-    public void saveVisit(String clientIp, Post post) {
+    public void saveVisit(Post post, String clientIp, String userAgent) {
 //        if (this.userService.currentUser().isAdmin())
 //            return;
 
@@ -27,6 +27,7 @@ public class VisitService {
         visit.setPost(post);
         visit.setUser(user);
         visit.setIsAdmin(user != null ? user.isAdmin() : false);
+        visit.setUserAgent(userAgent);
         this.visitRepository.save(visit);
     }
 
