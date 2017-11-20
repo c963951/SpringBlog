@@ -1,6 +1,7 @@
 
-form(method='POST', action='/admin/files/upload', enctype="multipart/form-data")
+form.post-form(method='POST', action='/admin/files/upload', enctype="multipart/form-data")
   input(type="hidden", name='_csrf', value='#{_csrf.token}')
-  input(type='file', name="file")
-  br
-  input(type='submit', value='Upload')
+  .item-row
+    input.form-control(type='file', name="file")
+  .item-row
+    input.btn.btn-primary(type='submit', value='Upload')

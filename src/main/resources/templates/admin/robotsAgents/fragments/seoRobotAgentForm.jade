@@ -1,0 +1,10 @@
+
+
+form.post-form(method='POST', action='/admin/robotsAgents/#{form.getId()}/edit')
+  input(type="hidden", name='_csrf', value='#{_csrf.token}')
+  input(type="hidden", name="id", value="#{form.getId()}")
+  .item-row
+    | User-Agent:
+    input.form-control(name="userAgent", value="#{form.getUserAgent()}")
+  .item-row
+    input.btn.btn-primary(type='submit', value='Save')
