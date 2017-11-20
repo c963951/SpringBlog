@@ -22,6 +22,10 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 
 ## Changelog
 
+#### 2017-11-21
+
+* Implemented opening of images in modal form
+
 #### 2017-11-20
 
 * Implemented exclusion of search-robots from visit counting.

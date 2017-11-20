@@ -44,6 +44,11 @@ img {
     padding-top: 0px !important;
 }
 
+.markdown-body img {
+    width: 100%;
+    height: auto;
+}
+
 img.flip-vert {
     -moz-transform: scaleY(-1);
     -o-transform: scaleY(-1);
