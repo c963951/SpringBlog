@@ -59,7 +59,7 @@ public class VisitService {
                 "SELECT COUNT(DISTINCT v.clientIp) " +
                         "FROM visits AS v " +
                         "LEFT JOIN seo_robots_agents AS ra " +
-                        "ON v.userAgent LIKE concat('%', ra.userAgent, '%') " +
+                        "ON LOWER(v.userAgent) LIKE concat('%', LOWER(ra.userAgent), '%') " +
                         "WHERE v.post_id = :post_id AND v.isAdmin = FALSE " +
                         "AND ra.id IS NULL ");
         query.setLong("post_id", post.getId());
