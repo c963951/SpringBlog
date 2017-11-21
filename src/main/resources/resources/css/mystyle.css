@@ -97,3 +97,7 @@ img.borderless {
 .sympathy-button {
     cursor: pointer;
 }
+
+.youtube-embedded {
+    border: none;
+}
