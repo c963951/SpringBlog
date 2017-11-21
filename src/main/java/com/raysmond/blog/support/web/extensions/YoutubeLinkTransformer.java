@@ -114,10 +114,12 @@ public class YoutubeLinkTransformer {
 
                 if (resolvedLink.getUrl().contains("www.youtube.com/watch")) {
 
-                    html.attr("src", resolvedLink.getUrl().replace("watch?v=", "embed/"));
+                    html.attr("src", resolvedLink.getUrl().replace("watch?v=".toLowerCase(), "embed/"));
                     html.attr("width", "420");
                     html.attr("height", "315");
                     html.attr("class", "youtube-embedded");
+                    html.attr("allowfullscreen", "true");
+                    html.attr("frameborder", "0");
                     html.srcPos(node.getChars()).withAttr(resolvedLink).tag("iframe");
                     //context.renderChildren(node);
                     html.tag("/iframe");
