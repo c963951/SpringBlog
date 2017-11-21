@@ -25,6 +25,7 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 #### 2017-11-21
 
 * Implemented opening of images in modal form
+* Implemented Flexmark plugin - converter from regular link to embedded-frame for Youtube videos
 
 #### 2017-11-20
 

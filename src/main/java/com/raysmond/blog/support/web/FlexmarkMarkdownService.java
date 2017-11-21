@@ -1,5 +1,6 @@
 package com.raysmond.blog.support.web;
 
+import com.raysmond.blog.support.web.extensions.YoutubeLinkTransformer;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
@@ -20,7 +21,11 @@ public class FlexmarkMarkdownService implements MarkdownService, SyntaxHighlight
         MutableDataSet options = new MutableDataSet();
 
         // uncomment to set optional extensions
-        options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create(), StrikethroughExtension.create()));
+        options.set(Parser.EXTENSIONS, Arrays.asList(
+                TablesExtension.create(),
+                StrikethroughExtension.create(),
+                YoutubeLinkTransformer.YouTubeLinkExtension.create()
+        ));
 
         // uncomment to convert soft-breaks to hard breaks
         //options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");
