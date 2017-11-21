@@ -101,3 +101,10 @@ img.borderless {
 .youtube-embedded {
     border: none;
 }
+
+@media (max-width: 767px) {
+    .youtube-embedded {
+        width: 100%;
+        /*height: auto;*/
+    }
+}
