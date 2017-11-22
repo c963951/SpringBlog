@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/seo")
+@RequestMapping(value = {"/seo", ""})
 public class SitemapController {
 
     @Autowired
