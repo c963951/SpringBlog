@@ -1,15 +1,12 @@
 package com.raysmond.blog.models.support;
 
-/**
- * @author Raysmond<i@raysmond.com>
- */
-public enum PostFormat {
-    HTML("Html"),
-    MARKDOWN("Markdown");
+public enum OgType {
+
+    ARTICLE("article");
 
     private String name;
 
-    PostFormat(String name){
+    OgType(String name){
         this.name = name;
     }
 
@@ -25,4 +22,5 @@ public enum PostFormat {
     public String toString() {
         return getName();
     }
+
 }

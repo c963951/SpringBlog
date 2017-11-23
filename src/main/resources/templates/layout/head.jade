@@ -21,6 +21,25 @@ meta(name='wmail-verification', content='4dcdcf694a46ce7015fdfb69eb87b87c')
 meta(name="google-site-verification", content="OmD_S_p2BcdcKepDETH25TRCckl6yVXdkhP6QSfv0RU")
 meta(name="msvalidate.01", content="7FF4CBEF427D306264AD6A092622B438")
 
+//open graph
+meta( property="og:site_name", content="#{App.getSiteName()}" )
+
+if seoData != null
+  //sended only from post
+  meta( property="og:title", content="#{post.getTitle()} - #{App.getSiteName()}" )
+  meta( property="og:url", content="#{viewHelper.getPostUrl(post)}" )
+
+  meta( property="og:type", content="#{seoData.getOgType().getName()}" )
+  meta( property="og:locale", content="#{seoData.getOgLocale().getName()}" )
+  meta( property="og:image", content="#{seoData.getOgImage()}" )
+  meta( property="og:video", content="#{seoData.getOgVideo()}" )
+
+else
+  meta( property="og:title", content="#{App.getSiteName()}" )
+  meta( property="og:type", content="website" )
+  meta( property="og:url", content="#{App.getMainUri()}" )
+
+
 title
   block title
     if post != null

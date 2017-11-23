@@ -3,6 +3,7 @@ package com.raysmond.blog.controllers;
 import com.raysmond.blog.Constants;
 import com.raysmond.blog.error.NotFoundException;
 import com.raysmond.blog.models.Post;
+import com.raysmond.blog.models.SeoPostData;
 import com.raysmond.blog.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,10 +62,19 @@ public class PostController {
         post.setVisitsCount(this.visitService.getUniqueVisitsCount(post));
         post.setSympathyCount(this.likeService.getTotalLikesByPost(post));
 
+        SeoPostData seoData = null;
+        if (post.getSeoData() == null) {
+            seoData = new SeoPostData();
+            seoData.setPost(post);
+        } else {
+            seoData = post.getSeoData();
+        }
+
         model.addAttribute("post", post);
         model.addAttribute("tags", this.postService.getPostTags(post));
         model.addAttribute("seoKeywords", this.postService.getSeoKeywordsAsString(post));
         model.addAttribute("seoDescription", post.getSeoDescription());
+        model.addAttribute("seoData", seoData);
 
         return "posts/show";
     }

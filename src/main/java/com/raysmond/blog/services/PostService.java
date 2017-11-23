@@ -3,13 +3,14 @@ package com.raysmond.blog.services;
 import com.raysmond.blog.Constants;
 import com.raysmond.blog.error.NotFoundException;
 import com.raysmond.blog.models.Post;
-import com.raysmond.blog.models.SeoKeyword;
+import com.raysmond.blog.models.SeoPostData;
 import com.raysmond.blog.models.Tag;
 import com.raysmond.blog.models.User;
 import com.raysmond.blog.models.support.PostFormat;
 import com.raysmond.blog.models.support.PostStatus;
 import com.raysmond.blog.models.support.PostType;
 import com.raysmond.blog.repositories.PostRepository;
+import com.raysmond.blog.repositories.SeoPostDataRepository;
 import com.raysmond.blog.support.web.MarkdownService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,9 @@ public class PostService {
 
     @Autowired
     private VisitService visitService;
+
+    @Autowired
+    private SeoPostDataRepository seoPostDataRepository;
 
 
     public static final String CACHE_NAME = "cache.post";
@@ -105,7 +109,7 @@ public class PostService {
         if (post.getPostFormat() == PostFormat.MARKDOWN) {
             post.setRenderedContent(markdownService.renderToHtml(post.getContent()));
         }
-
+        this.saveSeoData(post);
         return postRepository.save(post);
     }
 
@@ -122,7 +126,7 @@ public class PostService {
         if (post.getPostFormat() == PostFormat.MARKDOWN) {
             post.setRenderedContent(markdownService.renderToHtml(post.getContent()));
         }
-
+        this.saveSeoData(post);
         return postRepository.save(post);
     }
 
@@ -295,6 +299,13 @@ public class PostService {
         }
 
         return post;
+    }
+
+    private void saveSeoData(Post post) {
+        if (post.getSeoData() != null && post.getSeoData().getId() == null) {
+            SeoPostData data = post.getSeoData();
+            this.seoPostDataRepository.save(data);
+        }
     }
 
 }

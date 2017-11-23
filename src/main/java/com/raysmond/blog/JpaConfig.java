@@ -4,10 +4,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import com.raysmond.blog.Application;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,6 +41,7 @@ class JpaConfig implements TransactionManagementConfigurer {
     private Boolean useSqlComments;
     @Value("${spring.hibernate.format_sql}")
     private Boolean formatSql;
+
 
     @Bean
     public DataSource configureDataSource() {

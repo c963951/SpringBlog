@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.domingosuarez.boot.autoconfigure.jade4j.JadeHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Raysmond<i@raysmond.com>
  */
@@ -76,4 +79,16 @@ public class AppSetting {
         settingService.put(MAIN_URI, mainUri);
     }
 
+    public List<String> getOgLocales() {
+        ArrayList<String> ogLocales = new ArrayList<>();
+        ogLocales.add("en_EN");
+        ogLocales.add("ru_RU");
+        return ogLocales;
+    }
+
+    public List<String> getOgTypes() {
+        ArrayList<String> ogTypes = new ArrayList<>();
+        ogTypes.add("article");
+        return ogTypes;
+    }
 }

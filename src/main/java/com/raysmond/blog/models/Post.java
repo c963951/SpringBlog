@@ -61,6 +61,9 @@ public class Post extends BaseModel {
     @Column(nullable = false, columnDefinition = "character varying DEFAULT ''")
     private String seoDescription = "";
 
+    @OneToOne
+    private SeoPostData seoData;
+
     private String permalink;
 
     public String getRenderedContent() {

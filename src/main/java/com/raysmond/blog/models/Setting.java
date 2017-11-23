@@ -17,6 +17,7 @@ import java.util.Date;
 @Table(name = "settings")
 @Getter @Setter
 public class Setting extends BaseModel{
+
     @Column(name = "_key", unique = true, nullable = false)
     private String key;
 

@@ -4,10 +4,10 @@ import com.raysmond.blog.forms.PostForm;
 import com.raysmond.blog.models.Post;
 import com.raysmond.blog.models.Tag;
 import com.raysmond.blog.models.User;
-import com.raysmond.blog.models.support.PostFormat;
-import com.raysmond.blog.models.support.PostStatus;
+import com.raysmond.blog.models.support.*;
 import com.raysmond.blog.repositories.PostRepository;
 import com.raysmond.blog.repositories.UserRepository;
+import com.raysmond.blog.services.AppSetting;
 import com.raysmond.blog.services.PostService;
 import com.raysmond.blog.services.TagService;
 import com.raysmond.blog.utils.DTOUtil;
@@ -19,15 +19,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -60,36 +59,57 @@ public class PostController {
         return "admin/posts/index";
     }
 
-    @RequestMapping(value = "new")
-    public String newPost(Model model){
+    private String makeFormPostCreation(Model model) {
         PostForm postForm = DTOUtil.map(new Post(), PostForm.class);
-        postForm.setTitle("");
-        postForm.setPermalink("");
-        postForm.setContent("");
-        postForm.setPostTags("");
-        postForm.setSeoKeywords("");
+        return this.makeFormPostCreation(model, postForm);
+    }
+
+    private String makeFormPostCreation(Model model, PostForm postForm) {
+
+        postForm.init();
 
         model.addAttribute("postForm", postForm);
         model.addAttribute("postFormats", PostFormat.values());
         model.addAttribute("postStatus", PostStatus.values());
+        model.addAttribute("seoOgLocales", OgLocale.values());
+        model.addAttribute("seoOgTypes", OgType.values());
 
         return "admin/posts/new";
     }
 
-    @RequestMapping(value = "{postId:[0-9]+}/edit")
-    public String editPost(@PathVariable Long postId, Model model){
-        Post post = postRepository.findOne(postId);
-        PostForm postForm = DTOUtil.map(post, PostForm.class);
+    @RequestMapping(value = "new")
+    public String newPost(Model model){
+        return this.makeFormPostCreation(model);
+    }
 
-        postForm.setPostTags(postService.getTagNames(post.getTags()));
-        postForm.setSeoKeywords(post.getSeoKeywords());
+    private String makeFormPostEdition(Long postId, Model model) {
+        return this.makeFormPostEdition(postId, model, null);
+    }
+
+    private String makeFormPostEdition(Long postId, Model model, PostForm postForm) {
+        Post post = postRepository.findOne(postId);
+
+        if (postForm == null) {
+            postForm = DTOUtil.map(post, PostForm.class);
+        }
+
+        postForm.init();
+        DTOUtil.mapTo(post, postForm);
+        postForm.initFromPost(post, postService.getTagNames(post.getTags()));
 
         model.addAttribute("post", post);
         model.addAttribute("postForm", postForm);
         model.addAttribute("postFormats", PostFormat.values());
         model.addAttribute("postStatus", PostStatus.values());
+        model.addAttribute("seoOgLocales", OgLocale.values());
+        model.addAttribute("seoOgTypes", OgType.values());
 
         return "admin/posts/edit";
+    }
+
+    @RequestMapping(value = "{postId:[0-9]+}/edit")
+    public String editPost(@PathVariable Long postId, Model model){
+        return this.makeFormPostEdition(postId, model);
     }
 
     @RequestMapping(value = "{postId:[0-9]+}/delete", method = {DELETE, POST})
@@ -101,16 +121,18 @@ public class PostController {
     @RequestMapping(value = "", method = POST)
     public String create(Principal principal, @Valid PostForm postForm, Errors errors, Model model){
         if (errors.hasErrors()) {
-            model.addAttribute("postFormats", PostFormat.values());
-            model.addAttribute("postStatus", PostStatus.values());
-
-            return "admin/posts/new";
+            Map<String, WebError> webErrors = new HashMap<>();
+            errors.getAllErrors().forEach(e -> {
+                String field = ((FieldError)e).getField();
+                webErrors.put(field, new WebError(field, e.getDefaultMessage()));
+            });
+            model.addAttribute("errors", webErrors);
+            return this.makeFormPostCreation(model, postForm);
         } else {
             Post post = DTOUtil.map(postForm, Post.class);
             post.setUser(userRepository.findByEmail(principal.getName()));
             post.setTags(postService.parseTagNames(postForm.getPostTags()));
-            post.setSeoKeywords(postForm.getSeoKeywords());
-            post.setSeoDescription(postForm.getSeoDescription());
+            postForm.fillOgFieldsInPost(post);
 
             postService.createPost(post);
 
@@ -121,21 +143,26 @@ public class PostController {
     @RequestMapping(value = "{postId:[0-9]+}", method = {PUT, POST})
     public String update(@PathVariable Long postId, @Valid PostForm postForm, Errors errors, Model model){
         if (errors.hasErrors()){
-            model.addAttribute("postFormats", PostFormat.values());
-            model.addAttribute("postStatus", PostStatus.values());
-
-            return "admin/posts_edit";
+            Map<String, WebError> webErrors = new HashMap<>();
+            errors.getAllErrors().forEach(e -> {
+                String field = ((FieldError)e).getField();
+                webErrors.put(field, new WebError(field, e.getDefaultMessage()));
+            });
+            model.addAttribute("errors", webErrors);
+            return this.makeFormPostEdition(postId, model, postForm);
         } else {
             Post post = postRepository.findOne(postId);
             DTOUtil.mapTo(postForm, post);
             post.setTags(postService.parseTagNames(postForm.getPostTags()));
-            post.setSeoKeywords(postForm.getSeoKeywords());
-            post.setSeoDescription(postForm.getSeoDescription());
+            postForm.fillOgFieldsInPost(post);
 
             postService.updatePost(post);
 
             return "redirect:/admin/posts";
         }
     }
+
+
+
 
 }

@@ -9,7 +9,14 @@ block content
   h1 New Post
   hr
 
-  form.post-form(method="post",action="/admin/posts")
+  if errors != null
+    .alert.alert-danger
+      span Check out errors!
+      ol
+        for err in errors.values()
+          li #{err.getField()} : #{err.getErrorMessage()}
+
+  form.post-form(method="post", action="/admin/posts")
     .item-row
       input(type="hidden", name='_csrf', value='#{_csrf.token}')
     .item-row
@@ -27,9 +34,9 @@ block content
           select.form-control(name="postFormat")
             for format in postFormats
               if format != postForm.getPostFormat()
-                option(value="#{format.getId()}") #{format.getDisplayName()}
+                option(value="#{format.getId()}") #{format.getName()}
               else 
-                option(value="#{format.getId()}", selected="selected") #{format.getDisplayName()}
+                option(value="#{format.getId()}", selected="selected") #{format.getName()}
         .col-sm-3
           span Status
           select.form-control(name="postStatus")
@@ -57,9 +64,43 @@ block content
           span Seo Description
           input.form-control(name="seoDescription", value="#{postForm.getSeoDescription()}")
 
+      hr
+      h5 Open Graph
+      .row
+        .col-sm-3
+          span Type
+          select.form-control(name="seoOgType")
+            for ogType in seoOgTypes
+              if postForm.getSeoOgType() == ogType
+                option(value="#{ogType.getId()}", selected="selected") #{ogType.getName()}
+              else
+                option(value="#{ogType.getId()}") #{ogType.getName()}
+
+        .col-sm-3
+          span Image link
+          input.form-control(name="seoOgImage", value="#{postForm.getSeoOgImage()}")
+
+        .col-sm-3
+          span Video link
+          input.form-control(name="seoOgVideo", value="#{postForm.getSeoOgVideo()}")
+
+        .col-sm-3
+          span Locale
+          select.form-control(name="seoOgLocale")
+            for ogLocale in seoOgLocales
+              if postForm.getSeoOgLocale() == ogLocale
+                option(value="#{ogLocale.getId()}", selected="selected") #{ogLocale.getName()}
+              else
+                option(value="#{ogLocale.getId()}") #{ogLocale.getName()}
+
+
+
     .item-row
       hr
       button.btn.btn-primary.btn-block(type="submit") Create new post
+
+    .item-row
+      br
 
   script
     :javascript

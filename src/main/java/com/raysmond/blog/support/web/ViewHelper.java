@@ -1,7 +1,9 @@
 package com.raysmond.blog.support.web;
 
 
+import com.raysmond.blog.models.Post;
 import com.raysmond.blog.models.User;
+import com.raysmond.blog.models.support.WebError;
 import com.raysmond.blog.services.AppSetting;
 import com.raysmond.blog.services.UserService;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ import java.security.Principal;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+
 import com.domingosuarez.boot.autoconfigure.jade4j.JadeHelper;
 /**
  * @author Raysmond<i@raysmond.com>
@@ -95,5 +99,20 @@ public class ViewHelper {
 
     public String formatNumberByThousands(Integer number) {
         return this.formatNumberByThousands((long) number);
+    }
+
+    public String errorFormat(Map<String, WebError> errors, String field) {
+        if (errors != null && errors.containsKey(field)) {
+            return errors.get(field).getErrorMessage();
+        } else {
+            return "";
+        }
+    }
+
+    public String getPostUrl(Post post) {
+        return String.format("%s/posts/%s",
+                this.appSetting.getMainUri().endsWith("/") ? this.appSetting.getMainUri().substring(0, this.appSetting.getMainUri().length()-1) : this.appSetting.getMainUri(),
+                post.getPermalink().isEmpty() ? post.getId() : post.getPermalink()
+        );
     }
 }

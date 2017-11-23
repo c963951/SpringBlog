@@ -1,23 +1,25 @@
 package com.raysmond.blog.models.support;
 
-/**
- * @author Raysmond<i@raysmond.com>
- */
-public enum PostFormat {
-    HTML("Html"),
-    MARKDOWN("Markdown");
+public enum OgLocale {
+
+    en_EN("en_EN"),
+    ru_RU("ru_RU");
 
     private String name;
 
-    PostFormat(String name){
+    OgLocale(String name){
         this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public String getId() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId(){
         return name();
     }
 
@@ -25,4 +27,5 @@ public enum PostFormat {
     public String toString() {
         return getName();
     }
+
 }
