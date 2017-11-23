@@ -73,8 +73,8 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 
 #### 2017-11-03
 
-* Was forked from [SpringBlog by Raysmon](https://github.com/Raysmond/SpringBlog)
-* Was migrated onto __SpringBoot 1.5.8__, all libraries was updated
+* Forked from [SpringBlog by Raysmon](https://github.com/Raysmond/SpringBlog)
+* Migrated onto __SpringBoot 1.5.8__, all libraries updated
 
 
 
