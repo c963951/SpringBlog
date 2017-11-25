@@ -12,8 +12,7 @@ block content
   .post
     .content.markdown-body.my-font
       !{post.getRenderedContent()}
-      |#{viewHelper.checkString(post.getRenderedContent())}
-    
+
     .info 
       if !tags.isEmpty()
         ul.tags
