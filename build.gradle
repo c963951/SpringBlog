@@ -10,9 +10,9 @@ targetCompatibility = 1.8
 version = '2.7.3'
 
 repositories {
-    mavenLocal()
-    jcenter()
     mavenCentral()
+    jcenter()
+    mavenLocal()
 
     maven { url 'http://repo.spring.io/libs-release' }
     maven { url "http://repo.springsource.org/repo" }
@@ -57,10 +57,10 @@ dependencies {
 
     // view
     compile 'de.neuland-bfi:spring-jade4j:1.2.7'
-    compile 'org.pegdown:pegdown:1.6.0'
+    //compile 'org.pegdown:pegdown:1.6.0'
 
     //markdown processor
-    compile 'com.vladsch.flexmark:flexmark-all:0.27.0'
+    compile 'com.vladsch.flexmark:flexmark-all:0.28.8'
 
     // spring data
     compile 'org.springframework.data:spring-data-jpa:1.11.8.RELEASE'

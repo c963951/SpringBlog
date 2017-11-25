@@ -106,11 +106,7 @@ public class PostService {
             @CacheEvict(value = CACHE_NAME_COUNTS, allEntries = true)
     })
     public Post createPost(Post post) {
-        if (post.getPostFormat() == PostFormat.MARKDOWN) {
-            post.setRenderedContent(markdownService.renderToHtml(post.getContent()));
-        }
-        this.saveSeoData(post);
-        return postRepository.save(post);
+        return this.savePost(post);
     }
 
     @Caching(evict = {
@@ -123,8 +119,15 @@ public class PostService {
             @CacheEvict(value = CACHE_NAME_COUNTS, allEntries = true)
     })
     public Post updatePost(Post post) {
+        return this.savePost(post);
+    }
+
+
+    private Post savePost(Post post) {
         if (post.getPostFormat() == PostFormat.MARKDOWN) {
-            post.setRenderedContent(markdownService.renderToHtml(post.getContent()));
+            post.setRenderedContent(String.format("<div class=\"markdown-post\">%s</div>", markdownService.renderToHtml(post.getContent())));
+        } else {
+            post.setRenderedContent(String.format("<div class=\"html-post\">%s</div>", post.getContent()));
         }
         this.saveSeoData(post);
         return postRepository.save(post);

@@ -6,6 +6,8 @@ import com.raysmond.blog.models.User;
 import com.raysmond.blog.models.support.WebError;
 import com.raysmond.blog.services.AppSetting;
 import com.raysmond.blog.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,6 +24,8 @@ import com.domingosuarez.boot.autoconfigure.jade4j.JadeHelper;
 @Service
 @JadeHelper("viewHelper")
 public class ViewHelper {
+
+    private static Logger logger = LoggerFactory.getLogger(ViewHelper.class);
 
     private static DateFormatSymbols ruDateFormatSymbolsFull = new DateFormatSymbols(){
         @Override

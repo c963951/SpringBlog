@@ -1,11 +1,15 @@
 
-.markdown-body img {
+.markdown-body .markdown-post img,
+.markdown-body .html-post img.clickable {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.markdown-body img:hover {opacity: 0.7;}
+.markdown-body .markdown-post img:hover,
+.markdown-body .html-post img.clickable:hover {
+    opacity: 0.7;
+}
 
 /* The Modal (background) */
 .modal {

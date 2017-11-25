@@ -67,10 +67,10 @@ public class Post extends BaseModel {
     private String permalink;
 
     public String getRenderedContent() {
-        if (this.postFormat == PostFormat.MARKDOWN)
+        //if (this.postFormat == PostFormat.MARKDOWN)
             return renderedContent;
 
-        return getContent();
+        //return getContent();
     }
 
     public void setPermalink(String permalink){

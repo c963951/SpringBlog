@@ -12,6 +12,7 @@ block content
   .post
     .content.markdown-body.my-font
       !{post.getRenderedContent()}
+      |#{viewHelper.checkString(post.getRenderedContent())}
     
     .info 
       if !tags.isEmpty()
@@ -38,7 +39,7 @@ block content
   script
     :javascript
       $(document).ready(function() {
-        $(".markdown-body img").each(function(i, img){
+        $(".markdown-body .markdown-post img, .markdown-body .html-post img.clickable").each(function(i, img){
 
           // Get the modal
           var modal = document.getElementById('myModal');
