@@ -22,6 +22,10 @@ SpringBlog is powered by many powerful frameworks and third-party projects:
 
 ## Changelog
 
+#### 2017-11-27
+
+* Improved checking robots' user-agents by comparison using RegExp
+
 #### 2017-11-23
 
 * Added OpenGraph fields into post page
