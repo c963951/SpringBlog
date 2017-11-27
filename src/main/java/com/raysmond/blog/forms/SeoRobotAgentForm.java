@@ -13,4 +13,6 @@ public class SeoRobotAgentForm {
     @NotNull
     private String userAgent = "";
 
+    @NotNull
+    private Boolean isRegexp = false;
 }

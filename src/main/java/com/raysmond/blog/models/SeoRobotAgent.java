@@ -16,6 +16,9 @@ public class SeoRobotAgent extends BaseModel {
     @Column(nullable = false)
     private String userAgent;
 
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private Boolean isRegexp;
+
     public SeoRobotAgent() {
 
     }

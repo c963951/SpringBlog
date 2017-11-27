@@ -82,6 +82,10 @@ public class ViewHelper {
         return applicationEnv;
     }
 
+    public Boolean isProductionMode() {
+        return this.applicationEnv.equalsIgnoreCase("production");
+    }
+
     public void setApplicationEnv(String applicationEnv) {
         this.applicationEnv = applicationEnv;
     }
@@ -117,6 +121,16 @@ public class ViewHelper {
         return String.format("%s/posts/%s",
                 this.appSetting.getMainUri().endsWith("/") ? this.appSetting.getMainUri().substring(0, this.appSetting.getMainUri().length()-1) : this.appSetting.getMainUri(),
                 post.getPermalink().isEmpty() ? post.getId() : post.getPermalink()
+        );
+    }
+
+    public String getAbsoluteUrl(String url) {
+        if (url.isEmpty()) {
+            return "";
+        }
+        return String.format("%s/%s",
+                this.appSetting.getMainUri().endsWith("/") ? this.appSetting.getMainUri().substring(0, this.appSetting.getMainUri().length()-1) : this.appSetting.getMainUri(),
+                url.startsWith("/") ? url.substring(1) : url
         );
     }
 }

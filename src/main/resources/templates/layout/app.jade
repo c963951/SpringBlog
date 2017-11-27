@@ -14,5 +14,6 @@ html(lang="en")
 
     include footer
     
-    if viewHelper.getApplicationEnv() == "production"
+    if viewHelper.isProductionMode()
       include ../fragments/ga
+      include ../fragments/ya-metrics

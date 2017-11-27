@@ -31,8 +31,8 @@ if seoData != null
 
   meta( property="og:type", content="#{seoData.getOgType().getName()}" )
   meta( property="og:locale", content="#{seoData.getOgLocale().getName()}" )
-  meta( property="og:image", content="#{seoData.getOgImage()}" )
-  meta( property="og:video", content="#{seoData.getOgVideo()}" )
+  meta( property="og:image", content="#{viewHelper.getAbsoluteUrl(seoData.getOgImage())}" )
+  meta( property="og:video", content="#{viewHelper.getAbsoluteUrl(seoData.getOgVideo())}" )
 
 else
   meta( property="og:title", content="#{App.getSiteName()}" )

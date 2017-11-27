@@ -15,6 +15,7 @@ block content
           tr
             th ID
             th User-Agent
+            th Is Regexp
             th Operations
 
         tbody
@@ -22,6 +23,7 @@ block content
             tr
               td #{record.getId()}
               td #{record.getUserAgent()}
+              td #{record.getIsRegexp().toString()}
               td.operations
                 a.btn.btn-xs.btn-primary(href="/admin/robotsAgents/#{record.getId()}/edit")
                   i.fa.fa-edit
