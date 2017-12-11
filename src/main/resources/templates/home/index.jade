@@ -12,18 +12,7 @@ block title
   = App.getSiteName()
 
 block content
-  // include ../posts/index
-
-  .latest-posts
-    hr
-    h2.text-center Latest Posts
-  for post in posts
-    .post-item
-      a(href="/posts/#{post.getPermalink().length() > 0 ? post.getPermalink() : post.getId()}")
-        h2 #{post.getTitle()}
-      include ../posts/fragments/socialReadonly
-      .meta
-          span #{viewHelper.getFormattedDate(post.getCreatedAt())}
+  include ../posts/index
 
   .loadmore
     a.btn.btn-default(href="/posts/archive") More

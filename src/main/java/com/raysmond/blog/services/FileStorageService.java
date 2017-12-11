@@ -1,7 +1,9 @@
 package com.raysmond.blog.services;
 
 
+import com.raysmond.blog.error.NotFoundException;
 import com.raysmond.blog.models.StoredFile;
+import com.raysmond.blog.models.support.HttpContentTypeSerializer;
 import com.raysmond.blog.repositories.StoredFileRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +37,23 @@ public class FileStorageService {
 
     public StoredFile getFileById(Long id) {
         return repository.findById(id);
+    }
+
+    public StoredFile getFileByName(String fileName) {
+        StoredFile file = null;
+
+        file = repository.findByName(fileName);
+        if (file == null) {
+            if (fileName.matches("\\d+")) {
+                file = this.getFileById(Long.valueOf(fileName));
+            }
+        }
+
+        if (file == null) {
+            throw new NotFoundException("File " + fileName + " is not found");
+        }
+
+        return file;
     }
 
     public void storeFile(String filename, byte[] content) throws IOException {
@@ -81,5 +100,10 @@ public class FileStorageService {
         this.repository.delete(storedFile);
         Files.delete(path);
     }
+
+    public String getContentType(String fileName) {
+        return HttpContentTypeSerializer.getContentType(fileName);
+    }
+
 
 }

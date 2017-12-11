@@ -31,14 +31,14 @@ public class StoredFileController {
     @Autowired
     private FileStorageService storageService;
 
-    @GetMapping(value = "/{fileId:[\\d]+}", produces = APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value = "/{fileName:.+}", produces = APPLICATION_OCTET_STREAM_VALUE)
     @ExceptionHandler(value = FileNotFoundException.class)
     public @ResponseBody
-    HttpEntity<byte[]> getFileById(@PathVariable Long fileId, final HttpServletResponse response) throws IOException {
-        Assert.notNull(fileId);
-        StoredFile file = this.storageService.getFileById(fileId);
+    HttpEntity<byte[]> getFileById(@PathVariable String fileName, final HttpServletResponse response) throws IOException {
+
+        StoredFile file = this.storageService.getFileByName(fileName);
         if (file == null) {
-            response.sendError(404, String.format("File %s not found", fileId));
+            response.sendError(404, String.format("File %s not found", fileName));
             return null;
         }
         byte[] content;
