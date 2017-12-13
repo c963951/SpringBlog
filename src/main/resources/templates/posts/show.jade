@@ -4,7 +4,8 @@ block title
   = viewHelper.metaTitle(post.getTitle())
   
 block page_title
-  h1 #{post.getTitle()}
+  .condensed
+    h1 #{post.getTitle()}
   include ../posts/fragments/social
   p #{viewHelper.getFormattedDate(post.getCreatedAt())}
 

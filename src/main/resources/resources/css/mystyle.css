@@ -35,6 +35,34 @@ img {
     font-family: "Helvetica Neue", Helvetica, "Microsoft Yahei", "Hiragino Sans GB", "Microsoft Sans Serif", "WenQuanYi Micro Hei", sans !important;
 }
 
+.my-font h1,
+.my-font h2,
+.my-font h3,
+.my-font h4,
+.my-font h5,
+.my-font h6 {
+    margin-top: 1.5em;
+    margin-bottom: .5em;
+    text-rendering: optimizeLegibility;
+    line-height: 1.2;
+    word-spacing: -.05em;
+    font-style: normal;
+}
+
+.condensed h1,
+.condensed h2,
+.condensed h3,
+.condensed h4,
+.condensed h5,
+.condensed h6 {
+    margin-top: .5em;
+    margin-bottom: .5em;
+    text-rendering: optimizeLegibility;
+    line-height: 1.2;
+    word-spacing: -.05em;
+    font-style: normal;
+}
+
 .col-centered {
     margin: 0 auto;
     float: none;

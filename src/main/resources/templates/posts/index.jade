@@ -1,7 +1,8 @@
 for post in posts
   .post-item
     a(href="/posts/#{post.getPermalink().length() > 0 ? post.getPermalink() : post.getId()}")
-      h2 #{post.getTitle()}
+      .condensed
+        h2 #{post.getTitle()}
     include ../posts/fragments/socialReadonly
     .meta
       span #{viewHelper.getFormattedDate(post.getCreatedAt())}
@@ -13,10 +14,10 @@ for post in posts
           li.previous
             a.btn(href="?page=#{page+1}")
               span(aria-hidden="true") &larr;
-              |  Older posts
+              | Older posts
 
         if page > 1
           li.next
             a.btn(href="?page=#{page-1}")
-              |Newer posts
+              | Newer posts
               span(aria-hidden="true") &rarr;
