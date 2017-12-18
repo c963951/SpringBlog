@@ -5,6 +5,7 @@ import com.raysmond.blog.models.StoredFile;
 import com.raysmond.blog.repositories.StoredFileRepository;
 import com.raysmond.blog.services.FileStorageService;
 import com.raysmond.blog.services.UserService;
+import com.raysmond.blog.support.web.HttpContentTypeSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -31,7 +32,7 @@ public class StoredFileController {
     @Autowired
     private FileStorageService storageService;
 
-    @GetMapping(value = "/{fileName:.+}", produces = APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value = "/{fileName:.+}"/*, produces = APPLICATION_OCTET_STREAM_VALUE*/)
     @ExceptionHandler(value = FileNotFoundException.class)
     public @ResponseBody
     HttpEntity<byte[]> getFileById(@PathVariable String fileName, final HttpServletResponse response) throws IOException {
@@ -55,7 +56,8 @@ public class StoredFileController {
         }
 
         HttpHeaders header = new HttpHeaders();
-        header.setContentType(APPLICATION_OCTET_STREAM);
+        //header.setContentType(APPLICATION_OCTET_STREAM);
+        header.set("Content-Type", HttpContentTypeSerializer.getContentType(file.getName()));
         header.set("Content-Disposition", "inline; filename=" + file.getName());
         header.setContentLength(file.getSize());
 

@@ -137,3 +137,7 @@ img.borderless {
         /*height: auto;*/
     }
 }
+
+.posts-list h3 {
+    font-size: 24px !important;
+}

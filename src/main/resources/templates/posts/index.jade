@@ -1,23 +1,25 @@
-for post in posts
-  .post-item
-    a(href="/posts/#{post.getPermalink().length() > 0 ? post.getPermalink() : post.getId()}")
-      .condensed
-        h2 #{post.getTitle()}
-    include ../posts/fragments/socialReadonly
-    .meta
-      span #{viewHelper.getFormattedDate(post.getCreatedAt())}
+.posts-list
 
-.load-more
-    nav
-      ul.pager
-        if totalPages > page
-          li.previous
-            a.btn(href="?page=#{page+1}")
-              span(aria-hidden="true") &larr;
-              | Older posts
+  for post in posts
+    .post-item
+      a(href="/posts/#{post.getPermalink().length() > 0 ? post.getPermalink() : post.getId()}")
+        .condensed
+          h3 #{post.getTitle()}
+      include ../posts/fragments/socialReadonly
+      .meta
+        span #{viewHelper.getFormattedDate(post.getCreatedAt())}
 
-        if page > 1
-          li.next
-            a.btn(href="?page=#{page-1}")
-              | Newer posts
-              span(aria-hidden="true") &rarr;
+  .load-more
+      nav
+        ul.pager
+          if totalPages > page
+            li.previous
+              a.btn(href="?page=#{page+1}")
+                span(aria-hidden="true") &larr;
+                | Older posts
+
+          if page > 1
+            li.next
+              a.btn(href="?page=#{page-1}")
+                | Newer posts
+                span(aria-hidden="true") &rarr;

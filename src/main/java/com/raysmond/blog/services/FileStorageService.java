@@ -3,7 +3,7 @@ package com.raysmond.blog.services;
 
 import com.raysmond.blog.error.NotFoundException;
 import com.raysmond.blog.models.StoredFile;
-import com.raysmond.blog.models.support.HttpContentTypeSerializer;
+import com.raysmond.blog.support.web.HttpContentTypeSerializer;
 import com.raysmond.blog.repositories.StoredFileRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
