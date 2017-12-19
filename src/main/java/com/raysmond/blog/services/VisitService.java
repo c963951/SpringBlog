@@ -19,6 +19,7 @@ import javax.persistence.EntityManager;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,7 +62,7 @@ public class VisitService {
                         "LEFT JOIN seo_robots_agents AS ra " +
                         //"ON LOWER(v.userAgent) LIKE concat('%', LOWER(ra.userAgent), '%') " +
                         "ON CASE WHEN ra.isregexp = TRUE THEN " +
-                        "LOWER(v.userAgent) SIMILAR TO concat(LOWER(ra.userAgent)) " +
+                        "LOWER(v.userAgent) ~* LOWER(ra.userAgent) " +
                         "ELSE " +
                         "LOWER(v.userAgent) LIKE concat('%', LOWER(ra.userAgent), '%') " +
                         "END " +
@@ -83,26 +84,29 @@ public class VisitService {
         // exclude queries from robots if matches by UserAgent
         List<SeoRobotAgent> robotsAgents = this.seoRobotAgentRepository.findAll();
 
-        final Long[] count = {0L};
+        //final Long[] count = {0L};
+        AtomicReference<Long> count = new AtomicReference<>();
 
         this.visitRepository.getVisitsByPostAndIsAdminIsFalse(post).forEach(vr -> {
 
             Object[] v = (Object[]) vr;
 
             if (robotsAgents.size() == 0 || v[1] == null) {
-                count[0]++;
+                //count[0]++;
+                count.set(count.get()+1);
             } else {
                 robotsAgents.forEach(ra -> {
                     Pattern p = Pattern.compile(".*("+ra.getUserAgent()+").*", Pattern.CASE_INSENSITIVE);
                     Matcher m = p.matcher((String) v[1]);
                     if (!m.matches()) {
-                        count[0]++;
+                        //count[0]++;
+                        count.set(count.get()+1);
                     }
                 });
             }
         });
 
-        return count[0];
+        return count.get();
     }
 
 }
