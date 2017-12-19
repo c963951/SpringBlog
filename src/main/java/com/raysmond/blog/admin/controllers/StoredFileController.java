@@ -7,6 +7,7 @@ import com.raysmond.blog.repositories.StoredFileRepository;
 import com.raysmond.blog.services.FileStorageService;
 import com.raysmond.blog.services.UserService;
 import com.raysmond.blog.utils.DTOUtil;
+import com.raysmond.blog.utils.PaginatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,6 +49,7 @@ public class StoredFileController {
         model.addAttribute("totalPages", files.getTotalPages());
         model.addAttribute("page", page);
         model.addAttribute("files", files);
+        model.addAttribute("pagesList", PaginatorUtil.createPagesList(0, files.getTotalPages()-1));
 
         return "admin/files/index";
     }

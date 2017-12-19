@@ -1,5 +1,8 @@
 
 
+.row
+  include paginator
+
 .row(style="margin-top: 10px;")
   .col-sm-12
     table.table.table-bordered.table-hover.table-stripped
@@ -32,6 +35,8 @@
                 input(type="hidden", name='_csrf', value='#{_csrf.token}')
 
 
+.row
+  include paginator
 
 
 script

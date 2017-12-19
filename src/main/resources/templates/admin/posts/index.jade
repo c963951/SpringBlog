@@ -6,6 +6,9 @@ block content
   
   a.btn.btn-primary(href="/admin/posts/new") Create
 
+  .row()
+    include fragments/paginator
+
   .row(style="margin-top: 10px;")
     .col-sm-12
       table.table.table-bordered.table-hover.table-stripped
@@ -43,6 +46,8 @@ block content
       .col-sm-12
         div#pagination
 
+  .row()
+    include fragments/paginator
 
   script
     :javascript

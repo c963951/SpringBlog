@@ -11,6 +11,7 @@ import com.raysmond.blog.services.AppSetting;
 import com.raysmond.blog.services.PostService;
 import com.raysmond.blog.services.TagService;
 import com.raysmond.blog.utils.DTOUtil;
+import com.raysmond.blog.utils.PaginatorUtil;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -55,6 +56,7 @@ public class PostController {
         model.addAttribute("totalPages", posts.getTotalPages());
         model.addAttribute("page", page);
         model.addAttribute("posts", posts);
+        model.addAttribute("pagesList", PaginatorUtil.createPagesList(0, posts.getTotalPages()-1));
 
         return "admin/posts/index";
     }
