@@ -12,17 +12,17 @@
 
 	<jmxConfigurator />
 
-	<logger name="com.raysmond.blog" level="ALL"/>
+	<logger name="com.raysmond.blog" level="WARN"/>
 
 	<logger name="org.hibernate.SQL" level="WARN"/>
 
 	<!--<logger name="org.hibernate.type" level="TRACE"/>-->
 
-	<logger name="org.springframework.web" level="DEBUG"/>
+	<logger name="org.springframework.web" level="ERROR"/>
 
-	<logger name="com.raysmond.blog.controllers" level="DEBUG"/>
+	<logger name="com.raysmond.blog.controllers" level="WARN"/>
 
-	<logger name="com.raysmond.blog.admin.controllers" level="DEBUG"/>
+	<logger name="com.raysmond.blog.admin.controllers" level="WARN"/>
 
 
 	<root level="WARN">
