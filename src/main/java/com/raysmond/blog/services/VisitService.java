@@ -55,24 +55,24 @@ public class VisitService {
 
     public Long getUniqueVisitsCount(Post post) {
 
-        Session session = (Session) this.entityManager.getDelegate();
-        SQLQuery query = session.createSQLQuery(
-                "SELECT COUNT(DISTINCT v.clientIp) " +
-                        "FROM visits AS v " +
-                        "LEFT JOIN seo_robots_agents AS ra " +
-                        //"ON LOWER(v.userAgent) LIKE concat('%', LOWER(ra.userAgent), '%') " +
-                        "ON CASE WHEN ra.isregexp = TRUE THEN " +
-                        "LOWER(v.userAgent) ~* LOWER(ra.userAgent) " +
-                        "ELSE " +
-                        "LOWER(v.userAgent) LIKE concat('%', LOWER(ra.userAgent), '%') " +
-                        "END " +
-                        "WHERE v.post_id = :post_id AND v.isAdmin = FALSE " +
-                        "AND ra.id IS NULL ");
-        query.setLong("post_id", post.getId());
-        List<Object> result = query.list();
-        if (result.size() > 0L) {
-            return ((BigInteger)result.get(0)).longValue();
-        }
+//        Session session = (Session) this.entityManager.getDelegate();
+//        SQLQuery query = session.createSQLQuery(
+//                "SELECT COUNT(DISTINCT v.clientIp) " +
+//                        "FROM visits AS v " +
+//                        "LEFT JOIN seo_robots_agents AS ra " +
+//                        //"ON LOWER(v.userAgent) LIKE concat('%', LOWER(ra.userAgent), '%') " +
+//                        "ON CASE WHEN ra.isregexp = TRUE THEN " +
+//                        "LOWER(v.userAgent) ~* LOWER(ra.userAgent) " +
+//                        "ELSE " +
+//                        "LOWER(v.userAgent) LIKE concat('%', LOWER(ra.userAgent), '%') " +
+//                        "END " +
+//                        "WHERE v.post_id = :post_id AND v.isAdmin = FALSE " +
+//                        "AND ra.id IS NULL ");
+//        query.setLong("post_id", post.getId());
+//        List<Object> result = query.list();
+//        if (result.size() > 0L) {
+//            return ((BigInteger)result.get(0)).longValue();
+//        }
 
         return 0L;
 

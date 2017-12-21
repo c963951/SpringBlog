@@ -70,10 +70,7 @@ dependencies {
     compile 'redis.clients:jedis:2.9.0'
 
     // MySQL
-    //compile 'mysql:mysql-connector-java:+'
-
-    // PostgreSQL
-    compile 'org.postgresql:postgresql:42.1.1'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.45'
 
     // Validation
     compile 'org.hibernate:hibernate-validator:5.3.5.Final'

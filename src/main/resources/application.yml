@@ -1,5 +1,5 @@
 server:
-    port: 8001
+    port: 8080
     contextPath:
 
 spring:
@@ -13,21 +13,21 @@ spring:
       caching: false
 
     dataSource:
-      driverClassName: org.postgresql.Driver
-      url: jdbc:postgresql://localhost:5432/blog
-      username: blog
-      password: blogpass
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://us-cdbr-iron-east-05.cleardb.net/heroku_8874461e0f37e76
+      username: b49fee97d35337
+      password: 7195ab33
 
     hibernate:
-      dialect: org.hibernate.dialect.PostgreSQLDialect
+      dialect: org.hibernate.dialect.MySQLDialect
       hbm2ddl.auto: update
       show_sql: true
       use_sql_comments: true
       format_sql: true
 
     redis:
-      host: localhost
-      port: 6379
+      host: ec2-35-168-41-119.compute-1.amazonaws.com
+      port: 31909
       default_expire_time: 86400
 
 

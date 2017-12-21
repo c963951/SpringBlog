@@ -55,10 +55,10 @@ public class Post extends BaseModel {
     )
     private Set<Tag> tags = new HashSet<>();
 
-    @Column(nullable = false, columnDefinition = "character varying DEFAULT ''")
+    @Column(nullable = false)
     private String seoKeywords = "";
 
-    @Column(nullable = false, columnDefinition = "character varying DEFAULT ''")
+    @Column(nullable = false)
     private String seoDescription = "";
 
     @OneToOne
