@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.Map;
 
 import com.domingosuarez.boot.autoconfigure.jade4j.JadeHelper;
+
 /**
  * @author Raysmond<i@raysmond.com>
  */
@@ -27,34 +28,37 @@ public class ViewHelper {
 
     private static Logger logger = LoggerFactory.getLogger(ViewHelper.class);
 
-    private static DateFormatSymbols ruDateFormatSymbolsFull = new DateFormatSymbols(){
+    private static DateFormatSymbols ruDateFormatSymbolsFull = new DateFormatSymbols() {
         @Override
         public String[] getMonths() {
-            return new String[]{"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"};
+            return new String[] { "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" };
         }
     };
-    private static DateFormatSymbols ruDateFormatSymbolsShort = new DateFormatSymbols(){
+    private static DateFormatSymbols ruDateFormatSymbolsShort = new DateFormatSymbols() {
         @Override
         public String[] getMonths() {
-            return new String[]{"янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"};
+            return new String[] { "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" };
+
         }
     };
 
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy", ViewHelper.ruDateFormatSymbolsFull);
-    private static final SimpleDateFormat DATE_FORMAT_MONTH_DAY = new SimpleDateFormat("MMM dd", ViewHelper.ruDateFormatSymbolsShort);
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MMMM dd, yyyy",
+            ViewHelper.ruDateFormatSymbolsFull);
+    private static final SimpleDateFormat DATE_FORMAT_MONTH_DAY = new SimpleDateFormat("MMM dd",
+            ViewHelper.ruDateFormatSymbolsShort);
 
     private AppSetting appSetting;
 
     private String applicationEnv;
 
     @Autowired
-    public ViewHelper(AppSetting appSetting){
+    public ViewHelper(AppSetting appSetting) {
         this.appSetting = appSetting;
     }
 
     private long startTime;
 
-    public long getResponseTime(){
+    public long getResponseTime() {
         return System.currentTimeMillis() - startTime;
     }
 
@@ -66,15 +70,15 @@ public class ViewHelper {
         this.startTime = startTime;
     }
 
-    public String getFormattedDate(Date date){
+    public String getFormattedDate(Date date) {
         return date == null ? "" : DATE_FORMAT.format(date);
     }
 
-    public String getMonthAndDay(Date date){
+    public String getMonthAndDay(Date date) {
         return date == null ? "" : DATE_FORMAT_MONTH_DAY.format(date);
     }
 
-    public String metaTitle(String title){
+    public String metaTitle(String title) {
         return title + " · " + appSetting.getSiteName();
     }
 
@@ -91,37 +95,40 @@ public class ViewHelper {
     }
 
     public String formatNumberByThousands(Long number) {
-        if (number == null)
-            return "0";
+        if (number == null) return "0";
 
         double thousands = number / 1000;
         double millions = thousands / 1000;
         if (millions > 0d) {
             return String.format("%.3f", millions);
-        } else if (thousands > 0d) {
+        }
+        else if (thousands > 0d) {
             return String.format("%.3fK", thousands);
-        } else {
+        }
+        else {
             return String.format("%d", number);
         }
     }
 
     public String formatNumberByThousands(Integer number) {
-        return this.formatNumberByThousands((long) number);
+        return this.formatNumberByThousands((long)number);
     }
 
     public String errorFormat(Map<String, WebError> errors, String field) {
         if (errors != null && errors.containsKey(field)) {
             return errors.get(field).getErrorMessage();
-        } else {
+        }
+        else {
             return "";
         }
     }
 
     public String getPostUrl(Post post) {
         return String.format("%s/posts/%s",
-                this.appSetting.getMainUri().endsWith("/") ? this.appSetting.getMainUri().substring(0, this.appSetting.getMainUri().length()-1) : this.appSetting.getMainUri(),
-                post.getPermalink().isEmpty() ? post.getId() : post.getPermalink()
-        );
+                this.appSetting.getMainUri().endsWith("/")
+                        ? this.appSetting.getMainUri().substring(0, this.appSetting.getMainUri().length() - 1)
+                        : this.appSetting.getMainUri(),
+                post.getPermalink().isEmpty() ? post.getId() : post.getPermalink());
     }
 
     public String getAbsoluteUrl(String url) {
@@ -129,8 +136,9 @@ public class ViewHelper {
             return "";
         }
         return String.format("%s/%s",
-                this.appSetting.getMainUri().endsWith("/") ? this.appSetting.getMainUri().substring(0, this.appSetting.getMainUri().length()-1) : this.appSetting.getMainUri(),
-                url.startsWith("/") ? url.substring(1) : url
-        );
+                this.appSetting.getMainUri().endsWith("/")
+                        ? this.appSetting.getMainUri().substring(0, this.appSetting.getMainUri().length() - 1)
+                        : this.appSetting.getMainUri(),
+                url.startsWith("/") ? url.substring(1) : url);
     }
 }

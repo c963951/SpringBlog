@@ -1,5 +1,5 @@
 server:
-    port: 8001
+    port: 8080
     contextPath:
 
 spring:
@@ -11,12 +11,11 @@ spring:
 
     jade4j:
       caching: false
-
     dataSource:
       driverClassName: org.postgresql.Driver
-      url: jdbc:postgresql://localhost:5432/blog
-      username: blog
-      password: blogpass
+      url: jdbc:postgresql://ec2-54-83-3-101.compute-1.amazonaws.com:5432/d85tl1bgth69cl?sslmode=require
+      username: knnxsyewbxhtyw
+      password: aa44d19b794306892f64645419527c6a9487b4b8d10d7c214d756279b1f84162
 
     hibernate:
       dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -26,8 +25,8 @@ spring:
       format_sql: true
 
     redis:
-      host: localhost
-      port: 6379
+      host: ec2-35-168-41-119.compute-1.amazonaws.com
+      port: 31909
       default_expire_time: 86400
 
 

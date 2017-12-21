@@ -50,6 +50,8 @@ class JpaConfig implements TransactionManagementConfigurer {
         config.setJdbcUrl(url);
         config.setUsername(username);
         config.setPassword(password);
+        config.setMinimumIdle(2);
+        config.setIdleTimeout(30000);
 
         config.addDataSourceProperty("useUnicode", "true");
         config.addDataSourceProperty("characterEncoding", "utf8");
