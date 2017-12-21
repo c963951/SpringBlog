@@ -3,9 +3,9 @@ Description=MyBlog
 After=syslog.target
 
 [Service]
-User=bvn13
-#ExecStart=/home/bvn13/dev/blog/myblog.sh
-ExecStart=/usr/bin/java -jar /home/bvn13/dev/blog/SpringBlog-2.6.1.jar --spring.config.location=application-production.yml
+User=brian
+#ExecStart=/home/brian/dev/blog/myblog.sh
+ExecStart=/usr/bin/java -jar /home/brian/dev/blog/SpringBlog-2.6.1.jar --spring.config.location=application-production.yml
 SuccessExitStatus=143
 
 [Install]
